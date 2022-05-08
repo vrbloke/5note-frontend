@@ -3,11 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
+import Invoices from "./routes/invoices/invoices";
+import isLoggedIn from "./routes/helpers.js";
+import {Login} from "./routes/login/login";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+      <BrowserRouter>
+          <Routes>
+              <Route path="/" element={<App/>}>
+                <Route path="invoices" element={<Invoices/>}/>
+                <Route path="login" element={<Login/>}/>
+              </Route>
+          </Routes>
+      </BrowserRouter>
   </React.StrictMode>
 );
 
