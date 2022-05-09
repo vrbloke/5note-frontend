@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
-
-const $ = require('node-jquery');
+import axios from "axios";
 
 export function Login() {
     const [actionType, setActionType] = useState('');
@@ -16,7 +15,10 @@ export function Login() {
                 console.log(actionType)
                 console.log(loginValue)
                 console.log(passwordValue)
-                //$.ajax()
+                axios.get("https://pokeapi.co/api/v2/pokemon/ditto")
+                    .then(re => {
+                        console.log(re.data)
+                    })
         }
     }, [actionType])
 
