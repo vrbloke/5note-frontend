@@ -2,7 +2,7 @@ import React from 'react'
 
 const Board = () => {
   return (
-    <div>
+    <div style={{width:'100%'}} >
         <h1>Board</h1>
     </div>
   )

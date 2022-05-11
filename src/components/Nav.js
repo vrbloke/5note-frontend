@@ -1,9 +1,10 @@
 import React from 'react'
 import Button from './Button'
 
+
 const Nav = () => {
   return (
-    <div className='buttons'>
+    <div className='buttons' >
         <h1>Nazwa Tablicy</h1>
         <Button
           color={'white'}
@@ -15,11 +16,11 @@ const Nav = () => {
         />
         <Button
           color={'white'}
-          text={'Dodaj notatke'}
+          text={'Dodaj notatkę'}
         />
         <Button
           color={'white'}
-          text={'Zmien tablice'}
+          text={'Zmień tablicę'}
         />
     </div>
   )
