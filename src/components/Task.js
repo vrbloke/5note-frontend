@@ -2,7 +2,7 @@ import React,{ useRef } from 'react'
 import Draggable from "react-draggable";
 import {BsArrowsMove} from "react-icons/bs";
 
-const Task = (handleDoubleClick) => {
+const Task = (handleClick) => {
 
   const ChipStyles = useRef({
     position: 'absolute',

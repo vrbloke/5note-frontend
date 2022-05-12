@@ -1,15 +1,28 @@
-import React from 'react'
+import React,{useState} from 'react'
 import ReactDOM from "react-dom";
 import Task from "./Task";
 
 
 const Board = () => {
+  const [showBoard, setShowBoard] = React.useState(true)
+
+  // const handleDoubleClick= ()=> {
+  //   setShowBoard(false);
+  // }
+  
   return (
-    <div style={{width:'100%'}} >
-      <Task/>
+
+    <div style={{width:'100%'}} handleClick={()=>setShowBoard(!showBoard)}>
+      {
+      showBoard ?
+      (<><Task/>
       <Task/> 
-      <Task/>   
+      <Task/> </>  
+      )
+      :null
+      }
     </div>
+
   )
 }
 
