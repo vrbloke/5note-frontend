@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import Task from "./Task";
 
 
-const Board = () => {
+const Board = (props) => {
   const [showBoard, setShowBoard] = React.useState(true)
 
   // const handleDoubleClick= ()=> {
@@ -15,9 +15,9 @@ const Board = () => {
     <div style={{width:'100%'}} handleClick={()=>setShowBoard(!showBoard)}>
       {
       showBoard ?
-      (<><Task/>
-      <Task/> 
-      <Task/> </>  
+      (<><Task {...props}/>
+      <Task {...props}/> 
+      <Task {...props}/></>  
       )
       :null
       }
