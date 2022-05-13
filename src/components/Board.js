@@ -16,7 +16,7 @@ const [showTasks, setShowTasks] = React.useState(false)
       </div> }
 
       { !showTasks && <div style={{height:'100%'}}>
-      <BigTask/>
+      <BigTask onClose={() => setShowTasks(true)}/>
       </div> }
     </div> 
 
