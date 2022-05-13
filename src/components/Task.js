@@ -14,6 +14,11 @@ const Task = (props) => {
     height:'200px',
 });
 
+  if(props.isSample){
+    ChipStyles.current.marginLeft = "20px";
+    ChipStyles.current.marginTop = "100px";
+  }
+
   return (
     <Draggable>
       <button style={ChipStyles.current}>
