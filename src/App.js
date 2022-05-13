@@ -4,7 +4,6 @@ import Board from './components/Board'
 import Settings from './components/Settings'
 import {AiTwotoneSetting} from "react-icons/ai";
 import React, { useState } from 'react';
-import Button from './components/Button';
 
 function App() {
   const [bgColor, setBgColor] = useState('white');
@@ -14,6 +13,7 @@ function App() {
   const [format, setFormat] = useState("lista")
 
   const [isBoard, setBoardType] = useState(true);
+  const [Taks, setTasks] = useState(true);
 
   if(isBoard){
   return (
