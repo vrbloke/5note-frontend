@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Button = ({color,text, fun}) => {
+const Button = ({color,text, fun, margines, marginesTop,width}) => {
   return (
     <button 
-        style={{backgroundColor:color, display : 'block', textAlign:'center', margin: '0 auto',marginTop: '2vh', padding:'0.5vh',fontSize:'30px'}} 
+        style={{backgroundColor:color, display : 'block', textAlign:'center',margin: margines,marginTop: marginesTop, padding:'0.5vh',fontSize:'30px', marginBottom:'auto',width:width}} 
         className='btn'
         onClick={fun}
     >        {text}

@@ -24,7 +24,7 @@ const Task = ({onIcon},props) => {
       <button style={ChipStyles.current}>
         <h2 style={{color: props.textColor, fontSize: props.titleSize+"px"}}>Tytuł notatki</h2>
         <p style={{color: props.textColor, fontSize: props.textSize+"px"}}>Treść notatki</p>
-        <BsArrowsMove onClick={onIcon} style={{position: 'fixed' ,bottom: '5', right: '5',fontSize:'2.5vh'}}/>
+        {<BsArrowsMove onClick={onIcon} style={{position: 'fixed' ,bottom: '5', right: '5',fontSize:'2.5vh'}}/>}
       </button>
     </Draggable>
     

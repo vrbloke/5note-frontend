@@ -38,6 +38,7 @@ function App() {
       <div className="App" style={{background: bgColor}}>
         <div className="buttons" style={{margin: "50px"}}>
         <Button 
+        margines={'0 auto'}
         text={"Strona główna"} 
         fun={() => {setBoardType(true)}}/>
         <Task
