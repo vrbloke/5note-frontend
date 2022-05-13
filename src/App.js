@@ -22,12 +22,13 @@ function App() {
   return (
     <div className="App" style={{background: bgColor}}>
       <Nav/>
-      <Board 
-      textColor={textColor}
-      textSize={textSize}
-      titleSize={titleSize}
-      isSample={false}
-      />
+       <Board 
+              textColor={textColor}
+              textSize={textSize}
+              titleSize={titleSize}
+              isSample={false}
+              on
+        />
       <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh'}} onClick={() => {setBoardType(!isBoard)}}/>
     </div>
   );
@@ -37,6 +38,7 @@ function App() {
       <div className="App" style={{background: bgColor}}>
         <div className="buttons" style={{margin: "50px"}}>
         <Button 
+        margines={'0 auto'}
         text={"Strona główna"} 
         fun={() => {setBoardType(true)}}/>
         <Task
