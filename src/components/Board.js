@@ -4,7 +4,7 @@ import Task from "./Task";
 
 
 const Board = (props) => {
-  const [showBoard, setShowBoard] = React.useState(true)
+const [showTasks, setShowTasks] = React.useState(true)
 
   // const handleDoubleClick= ()=> {
   //   setShowBoard(false);
@@ -12,16 +12,13 @@ const Board = (props) => {
   
   return (
 
-    <div style={{width:'100%'}} handleClick={()=>setShowBoard(!showBoard)}>
-      {
-      showBoard ?
-      (<><Task {...props}/>
-      <Task {...props}/> 
-      <Task {...props}/></>  
-      )
-      :null
-      }
-    </div>
+    <div style={{width:'100%'}}>
+      { showTasks && <div>
+      <Task onIcon={() => setShowTasks(false)} {...props}/>
+      <Task onIcon={() => setShowTasks(false)} {...props}/> 
+      <Task onIcon={() => setShowTasks(false)} {...props}/>
+      </div> }
+    </div> 
 
   )
 }

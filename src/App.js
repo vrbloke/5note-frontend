@@ -22,12 +22,13 @@ function App() {
   return (
     <div className="App" style={{background: bgColor}}>
       <Nav/>
-      <Board 
-      textColor={textColor}
-      textSize={textSize}
-      titleSize={titleSize}
-      isSample={false}
-      />
+       <Board 
+              textColor={textColor}
+              textSize={textSize}
+              titleSize={titleSize}
+              isSample={false}
+              on
+        />
       <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh'}} onClick={() => {setBoardType(!isBoard)}}/>
     </div>
   );
