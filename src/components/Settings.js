@@ -13,7 +13,7 @@ const Settings = (props) => {
         { value: 'lista', label: 'lista' },
         { value: 'tablica', label: 'tablica' }
       ]
-
+      
     function handleBgColor(color) {
         props.changeBgColor(color.hex)
     }
