@@ -1,15 +1,40 @@
 import React, { useState } from 'react'
 import Button from './Button'
-import Select from 'react-select'
 import DraggableList from "react-draggable-lists";
-import TextField from "@material-ui/core/TextField";
+import { v4 as uuidv4 } from 'uuid';
+import {RiCloseFill} from "react-icons/ri";
 
 
 const Nav2 = (props) => {
 
+  const initialList = [
+
+  ];
+  
+
       const [isFiltr, setFiltr] = useState(false);
       const [isTag, setTag] = useState(false);
       const [tag, settag] = useState("");
+      const [list, setList] = React.useState(initialList);
+      const [name, setName] = React.useState('');
+
+      function handleChange(event) {
+        setName(event.target.value);
+      }
+
+      function handleAdd() {
+        const newList = list.concat({ name, id: uuidv4() });
+    
+        setList(newList);
+    
+        setName('');
+      }
+
+      function handleRemove(id){
+        const newList = list.filter((item) => item.id !== id);
+
+        setList(newList);
+      }
 
       const options = [
         { value: 'data_d', label: 'Data (od najstarszej)' },
@@ -72,6 +97,7 @@ const Nav2 = (props) => {
           text={'Zmień tablicę'}
         />
         </div>
+
         <div  style={{display:'flex'}}>
         <select style={{margin:'20px', fontSize:'20px', width:'200px', padding:'3px',marginTop:'30px'}}>
             <option selected value=''>Sortuj</option>
@@ -126,15 +152,25 @@ const Nav2 = (props) => {
             Wszystkie wybrane tagi
             <div>        
             </div>
-            <form style={{marginLeft:'20px', marginBottom:'10px'}} onSubmit={onSubmit}>
-                <label>
-                <input style={{fontSize:'20px', width:'200px'}} type='text' placeholder="Dodaj Tag" value={tag} onChange={(e) => settag(e.target.value)}/> </label>
-                <input style={{fontSize:'20px'}} type="submit" value="Dodaj" />
-            </form>
+
+            <div>
+                {list.map((item) => (
+                  <div style={{display:'flex',marginLeft:'20px'}}>
+                    <p style={{marginTop:'2px'}} key={item.id}>{item.name}</p>
+                    <RiCloseFill style={{color:'red', marginTop:'2px', fontSize:'30px'}} onClick={() =>handleRemove(item.id)}/>
+                  </div>
+                ))}
+            </div>
+                <div>
+                <input style={{fontSize:'20px', width:'200px', margin:'20px'}} type='text' placeholder="Dodaj Tag" value={name} onChange={handleChange}/>
+                <button style={{fontSize:'20px'}} type="button" onClick={handleAdd}>
+                  Dodaj
+                </button>
+                </div>
 
         </div>}
         <div>
-            <div style={{marginTop:'30px'}}>
+            <div style={{marginTop:'30px'}} >
                 <DraggableList width={300} height={50} rowSize={1}>
                     <div style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}}>Task1</div>
                     <div style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}}>Task2</div>
