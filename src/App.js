@@ -11,16 +11,40 @@ import Task from './components/Task';
 import BigTask from './components/BigTask';
 
 function App() {
+
+
+  //PSEUDO BAZA DANYCH NOTATEK
+  const Tasks = [
+    {
+      id: '0',
+      tytul: 'Tytuł 1',
+      tresc: "Treść notatki 1"
+    },
+
+    {
+      id: '1',
+      tytul: 'Tytuł 2',
+      tresc: "Treść notatki 2"
+    },
+
+    {
+      id: '2',
+      tytul: 'Tytuł 3',
+      tresc: "Treść notatki 3"
+    }
+  ];
+
+
+
   const [bgColor, setBgColor] = useState('white');
   const [textColor, setTextColor] = useState('blue');
   const [textSize, setTextSize] = useState('15');
   const [titleSize, setTitleSize] = useState('25');
-  const [format, setFormat] = useState("lista")
+  const [format, setFormat] = useState("tablica")
 
   const [isBoard, setBoardType] = useState(true);
-  const [Taks, setTasks] = useState(true);
 
-  if(format=='lista')
+  if(format==='lista')
   {
     if(isBoard)
     {
@@ -74,6 +98,8 @@ function App() {
                 titleSize={titleSize}
                 isSample={false}
                 format={format}
+               // notatki={['1','b']}
+               notatki={Tasks}
                 on
           />
         <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh'}} onClick={() => {setBoardType(!isBoard)}}/>
