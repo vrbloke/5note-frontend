@@ -14,7 +14,6 @@ const Nav2 = (props) => {
 
       const [isFiltr, setFiltr] = useState(false);
       const [isTag, setTag] = useState(false);
-      const [tag, settag] = useState("");
       const [list, setList] = React.useState(initialList);
       const [name, setName] = React.useState('');
 
@@ -35,36 +34,6 @@ const Nav2 = (props) => {
 
         setList(newList);
       }
-
-      const options = [
-        { value: 'data_d', label: 'Data (od najstarszej)' },
-        { value: 'data_g', label: 'Data (od najnowszej)' },
-        { value: 'priorytet_d', label: 'Priorytet (od największego)' },
-        { value: 'priorytet_g', label: 'Priorytet (od najmniejszego)' }
-      ]
-
-      const onSubmit = (e) => {
-        e.preventDefault()
-    
-        if(!tag){
-            alert('Dodaj tag')
-            return
-        }
-        return(
-          <div>Tag</div>
-        );
-    }
-
-      const listItems = [
-        "Entertainment",
-        "Private Time",
-        "Rest",
-        "Meal",
-        "Exercise",
-        "Work",
-        "Home Projects",
-        "Family"
-      ];
 
 
   return (
@@ -143,9 +112,6 @@ const Nav2 = (props) => {
             <input
                 style={{margin:'20px', fontSize:'20px'}}
                 type="checkbox"
-                id="topping"
-                name="topping"
-                value="Paneer"
                 //   checked={isChecked}
                 //   onChange={handleOnChange}
             />
