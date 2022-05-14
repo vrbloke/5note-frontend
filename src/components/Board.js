@@ -4,7 +4,7 @@ import Task from "./Task";
 import BigTask from "./BigTask";
 
 const Board = (props) => {
-const [showTasks, setShowTasks] = React.useState(false)
+const [showTasks, setShowTasks] = React.useState(true)
 
   return (
 
