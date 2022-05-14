@@ -11,7 +11,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./task.css"
 
-const BigTask = ({onClose}) => {
+const BigTask = ({form,onClose}) => {
 
   const [editorState, setEditorState] = useState(() =>
   EditorState.createEmpty()
@@ -40,7 +40,7 @@ const BigTask = ({onClose}) => {
         <FaUsers onClick={()=>setShowAllUsers(!showAllUsers)} style={{fontSize:'4vh', margin:'10px', marginTop:'auto', marginBottom:'auto', width:'10%'}}/>
         <h1 style={{margin:'auto',marginRight:'10px', width:'100%'}}>Tytuł</h1>
         <h1 style={{margin:'auto',marginRight:'20px', width:'15%'}}>Data</h1>
-        <IoClose onClick={onClose} style={{fontSize:'5vh', margin:'auto',marginRight:'20px', width:'10%'}}/>
+         {form ==='tablica' && <IoClose onClick={onClose} style={{fontSize:'5vh', margin:'auto',marginRight:'20px', width:'10%'}}/>}
       </div>}
       
       {!showEditor && <div style={{display:'flex',maxHeight: '800px'}}>

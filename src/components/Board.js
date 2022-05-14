@@ -16,7 +16,9 @@ const [showTasks, setShowTasks] = React.useState(true)
       </div> }
 
       { !showTasks && <div style={{height:'100%'}}>
-      <BigTask onClose={() => setShowTasks(true)}/>
+      <BigTask onClose={() => setShowTasks(true)}
+      form={props.format}
+      />
       </div> }
     </div> 
 
