@@ -9,6 +9,8 @@ import React, { useState } from 'react';
 import Button from './components/Button';
 import Task from './components/Task';
 import BigTask from './components/BigTask';
+import Account from './components/Account';
+import PasswordChange from './components/PasswordChange';
 
 function App() {
 
@@ -100,7 +102,8 @@ function App() {
         <Button 
         margines={'0 auto'}
         text={"Strona główna"} 
-        fun={() => {setBoardState('board')}}/>
+        fun={() => {setBoardState('board')}}
+        color={"white"}/>
         <Task
         textColor={textColor}
         textSize={textSize}
@@ -118,14 +121,50 @@ function App() {
       </div>
     );
   }
-  else if(boardState==='account'){
-    return(
-      <div>Konto</div>
-    );
-  }
   else if(boardState==='groups'){
     return(
-      <div>Grupy</div>
+      <div className="App" style={{background: bgColor}}>
+        <div className="buttons" style={{margin: "50px"}}>
+        <Button 
+        margines={'0 auto'}
+        text={"Strona główna"} 
+        fun={() => {setBoardState('board')}}
+        color={"white"}/>
+        </div>
+      </div>
+    );
+  }
+  else if(boardState==='account'){
+    return(
+      <div className="App" style={{background: bgColor}}>
+        <div className="buttons" style={{margin: "50px"}}>
+        <Button 
+        margines={'0 auto'}
+        text={"Strona główna"} 
+        fun={() => {setBoardState('board')}}
+        color={"white"}/>
+        </div>
+        <Account changeBoardState={setBoardState}/>
+      </div>
+    );
+  }
+  else if(boardState==='passwordChange'){
+    return(
+      <div className="App" style={{background: bgColor}}>
+        <div className="buttons" style={{margin: "50px"}}>
+        <Button 
+        margines={'0 auto'}
+        text={"Strona główna"} 
+        fun={() => {setBoardState('board')}}
+        color={"white"}/>
+        <Button 
+        margines={'0 auto'}
+        text={"Konto"} 
+        fun={() => {setBoardState('account')}}
+        color={"white"}/>
+        </div>
+        <PasswordChange changeBoardState={setBoardState}/>
+      </div>
     );
   }
 }
