@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import Button from './Button'
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, ContentState } from "draft-js";
+import { EditorState, ContentState, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {FaUserPlus,FaUsers} from "react-icons/fa"
 import {IoClose} from "react-icons/io5"
@@ -18,7 +18,6 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
 
   const [editorState, setEditorState] = useState(() =>
     EditorState.createWithContent(content)
-    //EditorState.createEmpty()
   );
 
   useEffect(() => {
@@ -28,7 +27,42 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
   const [showAllUsers, setShowAllUsers] = React.useState(false)
   const [showAddUsers, setShowAddUsers] = React.useState(false)
   const [showEditor, setShowEditor] = React.useState(false)
-  const [startDate, setStartDate] = useState(new Date(data));
+  const [startDate, setStartDate] = React.useState(new Date(data))
+  const [prior, setPriorytet] = React.useState(priorytet)
+  const [tyt, setTytul] = React.useState(tytul)
+  const [tr, setTresc] = React.useState(tresc)
+
+
+  function handleOnClick()
+  {
+    // var text = editorState.getCurrentContent().getBlocksAsArray();
+    // console.log(text);
+    const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
+    const mappedBlocks = blocks.map(
+      block => (!block.text.trim() && "\n") || block.text
+    );
+
+    let newText = "";
+    for (let i = 0; i < mappedBlocks.length; i++) {
+      const block = mappedBlocks[i];
+
+      // handle last block
+      if (i === mappedBlocks.length - 1) {
+        newText += block;
+      } else {
+        // otherwise we join with \n, except if the block is already a \n
+        if (block === "\n") newText += block;
+        else newText += block + "\n";
+      }
+      setTresc(newText);
+      console.log(tr);
+      console.log(startDate);
+      console.log(prior);
+      console.log(tyt);
+    }
+  }
+
+
 
   return (
 
@@ -42,8 +76,8 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
           text={"Edytuj"} />
         <FaUserPlus onClick={()=>setShowAddUsers(!showAddUsers)} style={{fontSize:'4vh', margin:'10px', marginTop:'auto', marginBottom:'auto', width:'10%'}}/>
         <FaUsers onClick={()=>setShowAllUsers(!showAllUsers)} style={{fontSize:'4vh', margin:'10px', marginTop:'auto', marginBottom:'auto', width:'10%'}}/>
-        <h1 style={{margin:'auto',marginRight:'10px', width:'100%'}}>{tytul}</h1>
-        <h1 style={{margin:'auto',marginRight:'20px', width:'15%'}}>Data</h1>
+        <h1 style={{margin:'auto',marginRight:'10px'}}>{tyt}</h1>
+        <h1 style={{margin:'auto',marginRight:'20px'}}>{startDate.toLocaleDateString()}</h1>
          {form ==='tablica' && <IoClose onClick={onClose} style={{fontSize:'5vh', margin:'auto',marginRight:'20px', width:'10%'}}/>}
       </div>}
       
@@ -77,7 +111,7 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
         </div>}
 
         <div style={{padding:'5vh', textAlign:'justify', fontSize:'20px', overflowY: 'scroll',maxHeight: '600px', width:'100%'}}>
-          {tresc}        
+          {tr}        
         </div>
       </div>}
 
@@ -91,15 +125,19 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
             margines={'50px'}
             text={"Cofnij"}
           />
-          <input style={{fontSize:'30px', width:'100%',margin:'20px'}} defaultValue={tytul}/>
+          <input style={{fontSize:'30px', width:'100%',margin:'20px'}} 
+            defaultValue={tytul}
+            onChange={e =>setTytul(e.target.value)}
+            />
           <DatePicker selected={startDate} onChange={(date:Date) => setStartDate(date)} />
           <input 
           style={{fontSize:'20px', height:'30px', margin:'auto', marginRight:'50px', width:'50px', textAlign:'center'}}
             type="number" 
             name="age" 
-            defaultValue={priorytet}
+            defaultValue={prior}
             min={1}
             max={10}
+            onChange={e =>setPriorytet(e.target.value)}
         />
         </div>
         <div style={{ border: "1px solid black", padding: '2px', minHeight: '600px', width:'90%', margin:'auto'}}>
@@ -108,13 +146,15 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
             onEditorStateChange={setEditorState}
           />
         </div>
-        <input style={{fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi[1]}/>
+        <input style={{fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi}/>
         <Button
-          fun={() => {setShowEditor(false)}}
+          //fun={() => {setShowEditor(false)}}
+          fun={() => {handleOnClick()}}
           width_p={'15%'}
           marginesTop={'15px'}
           margines={'auto'}
           text={"Edytuj"}
+          //onClick={handleOnClick}
         />
       </div>
       }
