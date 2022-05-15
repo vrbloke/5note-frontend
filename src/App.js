@@ -18,19 +18,28 @@ function App() {
     {
       id: '0',
       tytul: 'Tytuł 1',
-      tresc: "Treść notatki 1"
+      tresc: "Treść notatki 1",
+      data: "2022-05-01",
+      priorytet: 1,
+      tagi:['abc',"aai"]
     },
 
     {
       id: '1',
       tytul: 'Tytuł 2',
-      tresc: "Treść notatki 2"
+      tresc: "Treść notatki 2",
+      data: "2022-05-02",
+      priorytet: 2,
+      tagi:[]
     },
 
     {
       id: '2',
       tytul: 'Tytuł 3',
-      tresc: "Treść notatki 3"
+      tresc: "Treść notatki 3",
+      data: "2022-05-03",
+      priorytet: 3,
+      tagi:[]
     }
   ];
 
