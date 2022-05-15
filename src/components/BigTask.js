@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect,MouseEvent} from 'react'
 import Button from './Button'
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
@@ -6,10 +6,32 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {FaUserPlus,FaUsers} from "react-icons/fa"
 import {IoClose} from "react-icons/io5"
 import {CgProfile} from "react-icons/cg"
+import {MdAdd} from "react-icons/md"
 import {BiDotsVerticalRounded} from "react-icons/bi"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./task.css"
+import {RiCloseFill} from "react-icons/ri";
+
+
+const users=[
+  {
+    id:0,
+    nick:'user1'
+  },
+  {
+    id:1,
+    nick:'user2'
+  },
+  {
+    id:2,
+    nick:'user3'
+  },
+
+
+];
+
+
 
 const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
 
@@ -31,7 +53,20 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
   const [prior, setPriorytet] = React.useState(priorytet)
   const [tyt, setTytul] = React.useState(tytul)
   const [tr, setTresc] = React.useState(tresc)
+  const [listUsrs, setListUsrs] = React.useState(users);
+  const [usrId, setUsrId] = React.useState(-1);
+  const [usrNick, setUsrNick] = React.useState('');
 
+
+  function handleRemove(id){
+    const newList = listUsrs.filter((item) => item.id !== id);
+
+    setListUsrs(newList);
+  }
+
+  function handleChange(event) {
+    setUsrNick(event.target.value);
+  }
 
   function handleOnClick()
   {
@@ -54,6 +89,7 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
         if (block === "\n") newText += block;
         else newText += block + "\n";
       }
+
       setTresc(newText);
       console.log(tr);
       console.log(startDate);
@@ -62,8 +98,17 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
     }
   }
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      // this.setUsrId({value:e.target.value})
+      console.log(usrNick);
+      setUsrId(1);
+    }
+  }
 
 
+
+  
   return (
 
     <div style={{border:'1px solid black', width: '70%', margin:'auto', marginTop:'6vh',height: '800px'}}>
@@ -84,30 +129,27 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
       {!showEditor && <div style={{display:'flex',maxHeight: '800px'}}>
 
         {showAllUsers &&<div style={{border: '1px solid black', margin: '25px'}}>
-          <div style={{border: '1px solid black', width:'300px', margin: '10px',display:'flex'}}>
-            <CgProfile style ={{fontSize:'4vh', margin: 'auto', marginLeft:'10px'}}/>
-            <p style={{fontSize:'20px', fontWeight:'bold'}}>Nick</p>
-            <BiDotsVerticalRounded style={{fontSize:'4vh', margin:'auto', marginRight:'10px'}}/>
-          </div>
-          <div style={{border: '1px solid black', width:'300px', margin: '10px',display:'flex'}}>
-            <CgProfile style ={{fontSize:'4vh', margin: 'auto', marginLeft:'10px'}}/>
-            <p style={{fontSize:'20px', fontWeight:'bold'}}>Nick</p>
-            <BiDotsVerticalRounded style={{fontSize:'4vh', margin:'auto', marginRight:'10px'}}/>
-          </div>
-          <div style={{border: '1px solid black', width:'300px', margin: '10px',display:'flex'}}>
-            <CgProfile style ={{fontSize:'4vh', margin: 'auto', marginLeft:'10px'}}/>
-            <p style={{fontSize:'20px', fontWeight:'bold'}}>Nick</p>
-            <BiDotsVerticalRounded style={{fontSize:'4vh', margin:'auto', marginRight:'10px'}}/>
-          </div>
+            <div>
+              {listUsrs.map((item) => (
+                <div key={item.id} style={{border: '1px solid black', width:'300px', margin: '10px',display:'flex'}}>
+                  <CgProfile style ={{fontSize:'4vh', margin: 'auto', marginLeft:'10px'}}/>
+                  <p style={{fontSize:'20px', fontWeight:'bold'}}>{item.nick}</p>
+                  <RiCloseFill style={{color:'red', margin:'auto',marginRight:'10px', fontSize:'30px'}} onClick={() =>handleRemove(item.id)}/>
+                </div>
+              ))}
+            </div>
+
         </div>}
 
         {showAddUsers && <div style={{border: '1px solid black', padding:'5px', height: '200px', backgroundColor:'white', margin: '25px'}}>
-          <input style={{width:'90%', fontSize:'20px'}}placeholder="Search"/>
+          <input style={{width:'300px', fontSize:'20px'}}placeholder="Search" onKeyPress={handleKeyPress} onChange={handleChange}/>
+          { usrId >=0 &&
           <div style={{border: '1px solid black', width:'300px', margin: '10px',display:'flex'}}>
-            <CgProfile style ={{fontSize:'4vh', margin: 'auto', marginLeft:'10px'}}/>
-            <p style={{fontSize:'20px', fontWeight:'bold'}}>Nick</p>
-            <BiDotsVerticalRounded style={{fontSize:'4vh', margin:'auto', marginRight:'10px'}}/>
+            <CgProfile style ={{fontSize:'4vh', margin: 'auto', marginLeft:'10px'}}/>            
+              <p style={{fontSize:'20px', fontWeight:'bold'}}>{users[usrId].nick}</p>          
+            <MdAdd style={{fontSize:'4vh', margin:'auto', marginRight:'10px', color:'green'}}/>          
           </div>
+          }
         </div>}
 
         <div style={{padding:'5vh', textAlign:'justify', fontSize:'20px', overflowY: 'scroll',maxHeight: '600px', width:'100%'}}>
