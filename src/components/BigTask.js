@@ -42,8 +42,8 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
           text={"Edytuj"} />
         <FaUserPlus onClick={()=>setShowAddUsers(!showAddUsers)} style={{fontSize:'4vh', margin:'10px', marginTop:'auto', marginBottom:'auto', width:'10%'}}/>
         <FaUsers onClick={()=>setShowAllUsers(!showAllUsers)} style={{fontSize:'4vh', margin:'10px', marginTop:'auto', marginBottom:'auto', width:'10%'}}/>
-        <h1 style={{margin:'auto',marginRight:'10px', width:'100%'}}>{tytul}</h1>
-        <h1 style={{margin:'auto',marginRight:'20px', width:'15%'}}>Data</h1>
+        <h1 style={{margin:'auto',marginRight:'10px'}}>{tytul}</h1>
+        <h1 style={{margin:'auto',marginRight:'20px'}}>{startDate.toLocaleDateString()}</h1>
          {form ==='tablica' && <IoClose onClick={onClose} style={{fontSize:'5vh', margin:'auto',marginRight:'20px', width:'10%'}}/>}
       </div>}
       
@@ -108,7 +108,7 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
             onEditorStateChange={setEditorState}
           />
         </div>
-        <input style={{fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi[1]}/>
+        <input style={{fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi}/>
         <Button
           fun={() => {setShowEditor(false)}}
           width_p={'15%'}

@@ -62,6 +62,11 @@ function App() {
           <Nav2/>
           <BigTask
             form={format}
+            tytul={Tasks[0].tytul}
+            tresc={Tasks[0].tresc}
+            data={Tasks[0].data}
+            priorytet={Tasks[0].priorytet}
+            tagi={Tasks[0].tagi}
           />
           <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',background: bgColor}} onClick={() => {setBoardType(!isBoard)}}/>
         </div>
