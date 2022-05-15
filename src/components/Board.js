@@ -6,6 +6,7 @@ import BigTask from "./BigTask";
 const Board = (props) => {
 const [showTasks, setShowTasks] = React.useState(true)
 const [id, setId] = React.useState(0)
+
   return (
 
     <div style={{width:'100%', height:'100%'}}>
@@ -22,6 +23,9 @@ const [id, setId] = React.useState(0)
       form={props.format}
       tytul={props.notatki[id].tytul}
       tresc={props.notatki[id].tresc}
+      data={props.notatki[id].data}
+      priorytet={props.notatki[id].priorytet}
+      tagi={props.notatki[id].tagi}
       />
       </div> }
     </div> 

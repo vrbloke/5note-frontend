@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import Button from './Button'
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState } from "draft-js";
+import { EditorState, ContentState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {FaUserPlus,FaUsers} from "react-icons/fa"
 import {IoClose} from "react-icons/io5"
@@ -11,10 +11,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./task.css"
 
-const BigTask = ({form,tytul,tresc,onClose}) => {
+const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
+
+  const plainText = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.';
+  const content = ContentState.createFromText(tresc);
 
   const [editorState, setEditorState] = useState(() =>
-  EditorState.createEmpty()
+    EditorState.createWithContent(content)
+    //EditorState.createEmpty()
   );
 
   useEffect(() => {
@@ -24,7 +28,7 @@ const BigTask = ({form,tytul,tresc,onClose}) => {
   const [showAllUsers, setShowAllUsers] = React.useState(false)
   const [showAddUsers, setShowAddUsers] = React.useState(false)
   const [showEditor, setShowEditor] = React.useState(false)
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date(data));
 
   return (
 
@@ -87,12 +91,15 @@ const BigTask = ({form,tytul,tresc,onClose}) => {
             margines={'50px'}
             text={"Cofnij"}
           />
-          <input style={{fontSize:'30px', width:'100%',margin:'20px'}}placeholder="Tytuł"/>
+          <input style={{fontSize:'30px', width:'100%',margin:'20px'}} defaultValue={tytul}/>
           <DatePicker selected={startDate} onChange={(date:Date) => setStartDate(date)} />
           <input 
           style={{fontSize:'20px', height:'30px', margin:'auto', marginRight:'50px', width:'50px', textAlign:'center'}}
             type="number" 
             name="age" 
+            defaultValue={priorytet}
+            min={1}
+            max={10}
         />
         </div>
         <div style={{ border: "1px solid black", padding: '2px', minHeight: '600px', width:'90%', margin:'auto'}}>
@@ -101,7 +108,7 @@ const BigTask = ({form,tytul,tresc,onClose}) => {
             onEditorStateChange={setEditorState}
           />
         </div>
-        <input style={{fontSize:'20px', width:'90%', marginTop:'10px'}}placeholder="Tagi"/>
+        <input style={{fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi[1]}/>
         <Button
           fun={() => {setShowEditor(false)}}
           width_p={'15%'}
