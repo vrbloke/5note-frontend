@@ -44,6 +44,7 @@ const Nav2 = (props) => {
           margines={'20px'}
           color={'white'}
           text={'Konto'}
+          fun={() => props.changeBoardState('account')}
         />
         <Button
           marginesTop={'2vh'}
@@ -58,6 +59,7 @@ const Nav2 = (props) => {
           margines={'20px'}
           color={'white'}
           text={' Grupy'}
+          fun={() => props.changeBoardState('groups')}
         />
         <Button
           marginesTop={'2vh'}
