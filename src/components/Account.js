@@ -1,5 +1,5 @@
 import React from 'react'
-import Avatar from 'react-avatar';
+// import Avatar from 'react-avatar';
 import Button from './Button'
 
 
@@ -9,7 +9,7 @@ return(
       <div style={{border: "1px solid black", padding: "50px", margin: "50px", height: "200px"}}>
         <div style={{display: "flex"}}>
           <div style={{display: "block", width: "50%"}}>
-          <Avatar name={"H"} round={true} style={{margin: "20px"}}></Avatar>
+          {/* <Avatar name={"H"} round={true} style={{margin: "20px"}}></Avatar> */}
           </div>
           <div style={{display: "block"}}>
             <p>login</p>
