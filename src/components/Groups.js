@@ -9,6 +9,7 @@ import { margin } from "@mui/system";
 const Groups = (props) => {
 
 const [option, setOption] = useState('lista');
+const [isPassword, setIsPassword]= useState(false);
 
 return(
       <div>
@@ -93,9 +94,11 @@ return(
            </div>
            <div style={{display:'flex'}}>
             <input 
+                id="passwordCheck"
                 style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center'}}
                 type="checkbox" 
-                name="isPassword" 
+                name="isPassword"
+                onChange={() => {setIsPassword(!isPassword)}}
             />
             <p style={{fontSize:'20px', margin:'20px'}}>chroniona hasłem</p>
            </div>
@@ -103,8 +106,9 @@ return(
             <p style={{fontSize:'20px', margin:'20px'}}>hasło</p>
             <input 
                 style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'150px', textAlign:'center'}}
+                id="password" 
                 type="password" 
-                name="password" 
+                disabled={!isPassword}
             />
            </div>
            <p style={{fontSize:'20px', margin:'20px'}}>użytkownicy</p>
@@ -113,6 +117,23 @@ return(
             <Avatar size='50px' round={true} name={"P"}/>
             <Avatar size='50px' round={true} name={"O"}/>
           </div>
+          {isPassword &&
+          <div style={{display:'flex'}}>
+          <Button 
+          marginesTop={'20px'}
+          margines={'0 auto'}
+          text={"Dodaj użytkowników"} 
+          fun={() => {alert("dodawanie")}}
+          color={"white"}/>
+          <Button 
+          marginesTop={'20px'}
+          margines={'0 auto'}
+          text={"Stwórz grupę"} 
+          fun={() => {alert("tworzenie")}}
+          color={"white"}/>
+          </div>
+          }
+          {!isPassword &&
           <div style={{display:'flex'}}>
             <input 
                   style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'150px', textAlign:'center'}}
@@ -132,7 +153,7 @@ return(
             text={"Stwórz grupę"} 
             fun={() => {alert("tworzenie")}}
             color={"white"}/>
-          </div>
+          </div>}
       </div>}
       {option === 'join' &&
         <div style={{border: "1px solid black", padding: "50px", margin: "50px", width: "700px"}}>
