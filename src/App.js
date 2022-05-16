@@ -11,6 +11,7 @@ import Task from './components/Task';
 import BigTask from './components/BigTask';
 import Account from './components/Account';
 import PasswordChange from './components/PasswordChange';
+import Groups from './components/Groups';
 
 function App() {
 
@@ -131,6 +132,7 @@ function App() {
         fun={() => {setBoardState('board')}}
         color={"white"}/>
         </div>
+        <Groups/>
       </div>
     );
   }
@@ -158,6 +160,7 @@ function App() {
         fun={() => {setBoardState('board')}}
         color={"white"}/>
         <Button 
+        marginesTop={'2vh'}
         margines={'0 auto'}
         text={"Konto"} 
         fun={() => {setBoardState('account')}}

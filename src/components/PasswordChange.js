@@ -23,10 +23,11 @@ return(
             </label>
         </form>
         <Button 
-            margines={'0 auto'}
-            text={"Zmień hasło"} 
-            fun={() => {alert("zmiana hasła")}}
-            color={"white"}/>
+        marginesTop={'2vh'}
+        margines={'0 auto'}
+        text={"Zmień hasło"} 
+        fun={() => {alert("zmiana hasła")}}
+        color={"white"}/>
         </div>
     </div>
   );
