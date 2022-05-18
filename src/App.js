@@ -49,7 +49,7 @@ function App() {
 
 
   const [bgColor, setBgColor] = useState('#3F3939');
-  const [textColor, setTextColor] = useState('blue');
+  const [textColor, setTextColor] = useState('#000000');
   const [textSize, setTextSize] = useState('15');
   const [titleSize, setTitleSize] = useState('25');
   const [format, setFormat] = useState("tablica")
@@ -71,7 +71,7 @@ function App() {
             priorytet={Tasks[0].priorytet}
             tagi={Tasks[0].tagi}
           />
-          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',background: bgColor}} onClick={() => {setBoardState('settings')}}/>
+          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',marginTop:'10px'}} onClick={() => {setBoardState('settings')}}/>
         </div>
   
       );
@@ -90,7 +90,7 @@ function App() {
                   notatki={Tasks}
                   on
             />
-          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white"}} onClick={() => {setBoardState('settings')}}/>
+          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setBoardState('settings')}}/>
         </div>
       );
     }
@@ -121,7 +121,7 @@ function App() {
         titleSize={titleSize} changeTitleSize={setTitleSize}
         isSample={true}
         format={format} changeFormat={setFormat}/>
-        <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh', color:"white"}} onClick={() => {setBoardState('board')}}/>
+        <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh', color:"white", marginTop:'56px'}} onClick={() => {setBoardState('board')}}/>
       </div>
     );
   }
