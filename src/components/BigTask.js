@@ -196,7 +196,6 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
           marginesTop={'15px'}
           margines={'auto'}
           text={"Edytuj"}
-          //onClick={handleOnClick}
         />
       </div>
       }

@@ -52,9 +52,17 @@ function App() {
   const [textColor, setTextColor] = useState('blue');
   const [textSize, setTextSize] = useState('15');
   const [titleSize, setTitleSize] = useState('25');
-  const [format, setFormat] = useState("tablica")
+  const [format, setFormat] = useState("tablica");
+  const [numTask, setNumTask] = useState(1);
 
   const [boardState, setBoardState] = useState('board');
+
+  function f()
+  {
+    setNumTask(2);
+    console.log(numTask);
+    console.log('aaaaa');
+  }
 
   if(boardState==='board')
   {
@@ -62,14 +70,17 @@ function App() {
     {
       return(
         <div style={{display:'flex'}}>
-          <Nav2 changeBoardState={setBoardState}/>
+          <Nav2 changeBoardState={setBoardState}
+           notatki={Tasks}
+           fun={f}/>
+           
           <BigTask
             form={format}
-            tytul={Tasks[0].tytul}
-            tresc={Tasks[0].tresc}
-            data={Tasks[0].data}
-            priorytet={Tasks[0].priorytet}
-            tagi={Tasks[0].tagi}
+            tytul={Tasks[numTask].tytul}
+            tresc={Tasks[numTask].tresc}
+            data={Tasks[numTask].data}
+            priorytet={Tasks[numTask].priorytet}
+            tagi={Tasks[numTask].tagi}
           />
           <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',background: bgColor}} onClick={() => {setBoardState('settings')}}/>
         </div>

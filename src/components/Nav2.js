@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {RiCloseFill} from "react-icons/ri";
 
 
-const Nav2 = (props) => {
+const Nav2 = ({notatki, fun},props) => {
 
   const initialList = [
 
@@ -34,7 +34,6 @@ const Nav2 = (props) => {
 
         setList(newList);
       }
-
 
   return (
     <div style={{marginTop:'35px'}}className='buttons' >
@@ -89,8 +88,9 @@ const Nav2 = (props) => {
            <div style={{display:'flex'}}>
                 <input 
                     style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center'}}
-                    type="number" 
-                    name="age" 
+                    type="number"
+                    min={1}
+                    max={10}
                 />
                 <p style={{fontSize:'20px', margin:'20px'}}>Górny limit priorytetu</p>
            </div>
@@ -98,7 +98,9 @@ const Nav2 = (props) => {
                 <input 
                     style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center'}}
                     type="number" 
-                    name="age" 
+                    min={1}
+                    max={10}
+
                 />
                 <p style={{fontSize:'20px', margin:'20px'}}>Dolny limit priorytetu</p>
            </div>
@@ -139,13 +141,13 @@ const Nav2 = (props) => {
         </div>}
         <div>
             <div style={{marginTop:'30px'}} >
-                <DraggableList width={300} height={50} rowSize={1}>
-                    <div style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}}>Task1</div>
-                    <div style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}}>Task2</div>
-                    <div style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}}>Task3</div>
-                    <div style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}}>Task4</div>
-                    <div style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}}>Task5</div>
-                </DraggableList>
+
+          <DraggableList width={300} height={50} rowSize={1}>
+            {(notatki).map((item) => (
+              <div key={item.id} style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}} onDoubleClick={fun}>{item.tytul}
+            </div> ))}      
+         </DraggableList>
+
             </div>
         </div>
     </div>
