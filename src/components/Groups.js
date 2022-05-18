@@ -13,7 +13,7 @@ const [isPassword, setIsPassword]= useState(false);
 
 return(
       <div>
-        <div style={{display: "flex", width: "700px", marginLeft: "50px"}}>
+        <div style={{display: "flex", width: "700px", marginLeft: "270px"}}>
         <Button 
             marginesTop={'50px'}
             margines={'0 auto'}
@@ -34,13 +34,13 @@ return(
             color={"white"}/>
         </div>
         {option === 'lista' &&
-        <div style={{border: "1px solid black", padding: "50px", margin: "50px", height: "200px", width: "100%"}}>
-        <table style={{fontSize:'20px'}}>
+        <div style={{border: "1px solid white", padding: "50px", margin: "50px", height: "200px", width: "100%",borderRadius:'12px'}}>
+        <table style={{color:'lightGray',fontSize:'20px',width:'100%',textAlign:'center'}}>
           <tr>
             <th>Nazwa</th>
             <th>Hasło</th>
             <th>Użytkownicy</th>
-            <th>Akcje</th>
+            <th style={{textAlign:'left'}}>Akcje</th>
           </tr>
           <tr>
             <td>grupa1</td>
@@ -83,27 +83,27 @@ return(
         </table>
         </div>}
       {option === 'create' &&
-        <div style={{border: "1px solid black", padding: "50px", margin: "50px", width: "700px"}}>
-          <div style={{display:'flex'}}>
-            <p style={{fontSize:'20px', margin:'20px'}}>nazwa</p>
+        <div style={{border: "1px solid white", padding: "50px", margin: "50px", width: "100%",borderRadius:'12px', color:"lightgray"}}>
+          <div style={{display:'flex',marginLeft:"350px"}}>
+            <p style={{fontSize:'20px', margin:'20px',marginTop:"25px"}}>Nazwa</p>
             <input 
                 style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'150px', textAlign:'center'}}
                 type="text" 
                 name="groupName" 
             />
            </div>
-           <div style={{display:'flex'}}>
+           <div style={{display:'flex', marginLeft:"384px"}}>
             <input 
                 id="passwordCheck"
-                style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center'}}
+                style={{fontSize:'20px', height:'30px', marginLeft:'5px', marginTop:'18px', width:'50px', textAlign:'center'}}
                 type="checkbox" 
                 name="isPassword"
                 onChange={() => {setIsPassword(!isPassword)}}
             />
-            <p style={{fontSize:'20px', margin:'20px'}}>chroniona hasłem</p>
+            <p style={{fontSize:'20px', margin:'20px'}}>Chroniona hasłem</p>
            </div>
-           <div style={{display:'flex'}}>
-            <p style={{fontSize:'20px', margin:'20px'}}>hasło</p>
+           <div style={{display:'flex',marginLeft:"362px"}}>
+            <p style={{fontSize:'20px', margin:'18px',marginTop:"25px"}}>Hasło</p>
             <input 
                 style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'150px', textAlign:'center'}}
                 id="password" 
@@ -111,7 +111,7 @@ return(
                 disabled={!isPassword}
             />
            </div>
-           <p style={{fontSize:'20px', margin:'20px'}}>użytkownicy</p>
+           <p style={{fontSize:'20px', margin:'20px'}}>Użytkownicy</p>
           <div style={{display:'flex'}}>
             {/* <Avatar size='50px' round={true} name={"H"}/>
             <Avatar size='50px' round={true} name={"P"}/>
@@ -135,20 +135,21 @@ return(
           }
           {!isPassword &&
           <div style={{display:'flex'}}>
+            
+            <Button 
+            marginesTop={'80px'}
+            margines={'0 auto'}
+            text={"Dodaj użytkownika"} 
+            fun={() => {alert("dodawanie")}}
+            color={"white"}/>
             <input 
-                  style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'150px', textAlign:'center'}}
+                  style={{fontSize:'20px', height:'37px', width:'150px', textAlign:'center',margin:'auto',marginRight:'25%',marginLeft:'22%'}}
                   type="text" 
                   defaultValue="nick"
                   name="nick" 
               />
             <Button 
-            marginesTop={'20px'}
-            margines={'0 auto'}
-            text={"Dodaj użytkownika"} 
-            fun={() => {alert("dodawanie")}}
-            color={"white"}/>
-            <Button 
-            marginesTop={'20px'}
+            marginesTop={'77px'}
             margines={'0 auto'}
             text={"Stwórz grupę"} 
             fun={() => {alert("tworzenie")}}
@@ -156,17 +157,17 @@ return(
           </div>}
       </div>}
       {option === 'join' &&
-        <div style={{border: "1px solid black", padding: "50px", margin: "50px", width: "700px"}}>
-          <div style={{display:'flex'}}>
-            <p style={{fontSize:'20px', margin:'20px'}}>nazwa</p>
+        <div style={{color:"lightgray",border: "1px solid white", padding: "50px", margin: "50px", width: "100%",borderRadius: "12px"}}>
+          <div style={{display:'flex',marginLeft:"350px"}}>
+            <p style={{fontSize:'20px', margin:'20px',marginTop: '25px'}}>Nazwa</p>
             <input 
                 style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'150px', textAlign:'center'}}
                 type="text" 
                 name="groupName" 
             />
            </div>
-           <div style={{display:'flex'}}>
-            <p style={{fontSize:'20px', margin:'20px'}}>hasło (opcjonalnie)</p>
+           <div style={{display:'flex',marginLeft:"240px"}}>
+            <p style={{fontSize:'20px', margin:'20px',marginTop:'25px'}}>Hasło (opcjonalnie)</p>
             <input 
                 style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'150px', textAlign:'center'}}
                 type="password" 
