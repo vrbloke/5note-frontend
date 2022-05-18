@@ -105,7 +105,10 @@ function App() {
         text={"Strona główna"} 
         fun={() => {setBoardState('board')}}
         color={"white"}/>
-        <Task
+        <Task 
+        onIcon={() => {}} 
+        tytul={"Test"} 
+        tresc={"test test"} 
         textColor={textColor}
         textSize={textSize}
         titleSize={titleSize}

@@ -2,7 +2,7 @@ import React,{ useRef } from 'react'
 import Draggable from "react-draggable";
 import {BsArrowsMove} from "react-icons/bs";
 
-const Task = ({onIcon,tytul,tresc},props) => {
+const Task = (props) => {
 
   const ChipStyles = useRef({
     backgroundColor:'#FFFFA7',
@@ -24,9 +24,9 @@ const Task = ({onIcon,tytul,tresc},props) => {
   return (
     <Draggable>
       <button style={ChipStyles.current}>
-        <h2 style={{color: props.textColor, fontSize: props.titleSize+"px"}}>{tytul}</h2>
-        <p style={{color: props.textColor, fontSize: props.textSize+"px"}}>{tresc}</p>
-        {<BsArrowsMove onClick={onIcon} style={{position: 'fixed' ,bottom: '5', right: '5',fontSize:'2.5vh'}}/>}
+      <h2 style={{color: props.textColor, fontSize: props.titleSize+"px"}}>{props.tytul}</h2>
+        <p style={{color: props.textColor, fontSize: props.textSize+"px"}}>{props.tresc}</p>
+        {<BsArrowsMove onClick={props.onIcon} style={{position: 'fixed' ,bottom: '5', right: '5',fontSize:'2.5vh'}}/>}
       </button>
     </Draggable>
     
