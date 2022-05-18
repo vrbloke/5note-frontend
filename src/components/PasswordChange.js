@@ -5,7 +5,7 @@ import Button from './Button'
 const PasswordChange = (props) => {
 
 return(
-    <div style={{border: "1px solid black", padding: "50px", margin: "50px", height: "200px", display: "flex"}}>
+    <div style={{border: "1px solid white", padding: "50px", marginLeft: "25%", marginTop: "8%",height: "200px",borderRadius: "12px",color: "lightgray"}}>
         <div style={{flexDirection: "column", width: "200px"}}>
         <form>
             <label>
