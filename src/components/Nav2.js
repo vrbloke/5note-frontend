@@ -72,7 +72,7 @@ const Nav2 = ({notatki, fun},props) => {
         <select style={{margin:'20px', fontSize:'20px', width:'200px', padding:'3px',marginTop:'30px'}}>
             <option selected value=''>Sortuj</option>
             <option value='data_d'>Data (od najstarszej)</option>
-            <option value='data__g'>Data (od najnowszejj)</option>
+            <option value='data__g'>Data (od najnowszej)</option>
             <option value='priorytet_d'>Priorytet (od najmniejszego)</option>
             <option value='priorytet_g'>Priorytet (od największego)</option>
         </select>
