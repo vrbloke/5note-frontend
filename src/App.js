@@ -59,7 +59,7 @@ function App() {
 
   function f()
   {
-    setNumTask(2);
+    setNumTask(1);
     console.log(numTask);
     console.log('aaaaa');
   }
