@@ -12,6 +12,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./task.css"
 import {RiCloseFill} from "react-icons/ri";
+import TextEditor from "./TextEditor.js"
 
 
 const users=[
@@ -56,12 +57,34 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
   const [listUsrs, setListUsrs] = React.useState(users);
   const [usrId, setUsrId] = React.useState(-1);
   const [usrNick, setUsrNick] = React.useState('');
+  const [value, setValue] = React.useState('')
 
 
   function handleRemove(id){
     const newList = listUsrs.filter((item) => item.id !== id);
 
     setListUsrs(newList);
+  }
+
+  function uploadImageCallBack(file) {
+    return new Promise(
+      (resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://api.imgur.com/3/image');
+        xhr.setRequestHeader('Authorization', 'Client-ID XXXXX');
+        const data = new FormData();
+        data.append('image', file);
+        xhr.send(data);
+        xhr.addEventListener('load', () => {
+          const response = JSON.parse(xhr.responseText);
+          resolve(response);
+        });
+        xhr.addEventListener('error', () => {
+          const error = JSON.parse(xhr.responseText);
+          reject(error);
+        });
+      }
+    );
   }
 
   function handleChange(event) {
@@ -182,11 +205,16 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
             onChange={e =>setPriorytet(e.target.value)}
         />
         </div>
-        <div style={{ border: "1px solid black", padding: '2px', minHeight: '600px', width:'90%', margin:'auto'}}>
-          <Editor
+      <div style={{ border: "1px solid black", padding: '2px', minHeight: '600px', width:'90%', margin:'auto'}}>
+         {/* <Editor
             editorState={editorState}
             onEditorStateChange={setEditorState}
-          />
+            toolbarClassName="toolbarClassName"
+  wrapperClassName="wrapperClassName"
+  editorClassName="editorClassName"
+          />  */}
+          <TextEditor setValue={setValue}/>
+          {value}
         </div>
         <input style={{fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi}/>
         <Button
