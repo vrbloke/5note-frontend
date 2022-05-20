@@ -54,12 +54,13 @@ function App() {
   const [titleSize, setTitleSize] = useState('25');
   const [format, setFormat] = useState("tablica");
   const [numTask, setNumTask] = useState(1);
+  const [showNav, setShowNav] = React.useState(true);
 
   const [boardState, setBoardState] = useState('board');
 
   function f()
   {
-    setNumTask(1);
+    {setNumTask(1)};
     console.log(numTask);
     console.log('aaaaa');
   }
@@ -70,9 +71,9 @@ function App() {
     {
       return(
         <div style={{display:'flex'}}>
-          <Nav2 changeBoardState={setBoardState}
+          {showNav && <Nav2 changeBoardState={setBoardState}
            notatki={Tasks}
-           fun={f}/>
+           fun={f}/>}
            
           <BigTask
             form={format}
@@ -81,6 +82,7 @@ function App() {
             data={Tasks[numTask].data}
             priorytet={Tasks[numTask].priorytet}
             tagi={Tasks[numTask].tagi}
+            funkcja={setShowNav}
           />
           <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',marginTop:'10px'}} onClick={() => {setBoardState('settings')}}/>
         </div>
@@ -100,6 +102,8 @@ function App() {
                   // notatki={['1','b']}
                   notatki={Tasks}
                   on
+                  funkcja={setShowNav}
+                  
             />
           <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setBoardState('settings')}}/>
         </div>
