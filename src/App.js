@@ -53,16 +53,16 @@ function App() {
   const [textSize, setTextSize] = useState('15');
   const [titleSize, setTitleSize] = useState('25');
   const [format, setFormat] = useState("tablica");
-  const [numTask, setNumTask] = useState(1);
+  const [numTask, setNumTask] = React.useState(1);
   const [showNav, setShowNav] = React.useState(true);
 
   const [boardState, setBoardState] = useState('board');
 
   function f()
   {
-    {setNumTask(1)};
+    setNumTask(0);
     console.log(numTask);
-    console.log('aaaaa');
+    console.log('aaaa');
   }
 
   if(boardState==='board')
@@ -82,7 +82,7 @@ function App() {
             data={Tasks[numTask].data}
             priorytet={Tasks[numTask].priorytet}
             tagi={Tasks[numTask].tagi}
-            funkcja={setShowNav}
+            funkcja={f}
           />
           <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',marginTop:'10px'}} onClick={() => {setBoardState('settings')}}/>
         </div>
