@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {RiCloseFill} from "react-icons/ri";
 
 
-const Nav2 = ({notatki, fun},props) => {
+const Nav2 = (props) => {
 
   const initialList = [
 
@@ -143,8 +143,8 @@ const Nav2 = ({notatki, fun},props) => {
             <div style={{marginTop:'30px'}} >
 
           <DraggableList width={300} height={50} rowSize={1}>
-            {(notatki).map((item) => (
-              <div key={item.id} style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}} onDoubleClick={fun}>{item.tytul}
+            {(props.notatki).map((item) => (
+              <div key={item.id} style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}} onDoubleClick={props.fun}>{item.tytul}
             </div> ))}      
          </DraggableList>
 

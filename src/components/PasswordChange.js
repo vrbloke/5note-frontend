@@ -5,19 +5,19 @@ import Button from './Button'
 const PasswordChange = (props) => {
 
 return(
-    <div style={{border: "1px solid white", padding: "50px", marginLeft: "25%", marginTop: "8%",height: "200px",borderRadius: "12px",color: "lightgray"}}>
+    <div style={{border: "1px solid white", padding: "50px", marginLeft: "25%", marginTop: "8%",height: "300px",borderRadius: "12px",color: "lightgray"}}>
         <div style={{flexDirection: "column", width: "200px"}}>
         <form>
             <label>
-                Poprzednie hasło:
+                <p>Poprzednie hasło:</p>
                 <input type="text" name="oldPassword" />
             </label>
             <label>
-                Nowe hasło:
+                <p>Nowe hasło:</p>
                 <input type="password" name="newPassword" />
             </label>
             <label>
-                Powtórz hasło:
+                <p>Powtórz hasło:</p>
                 <input type="password" name="repeatPassword" />
             </label>
         </form>
