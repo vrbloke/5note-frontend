@@ -13,6 +13,7 @@ import Account from './components/Account';
 import PasswordChange from './components/PasswordChange';
 import Groups from './components/Groups';
 import AddTask from './components/AddTask';
+import BoardSet from './components/BoardSet';
 
 function App() {
 
@@ -207,6 +208,22 @@ function App() {
         tagi={Tasks[numTask].tagi}
         funkcja={setBoardState}/>
     </div>
+    );
+  }
+  else if(boardState==='boardSet'){
+    return(
+      <div style={{display: 'flex', background: bgColor}}>
+        <div className="buttons" style={{margin: "50px"}}>
+        <Button 
+        margines={'0 auto'}
+        text={"Strona główna"} 
+        fun={() => {setBoardState('board')}}
+        color={"white"}/>
+        </div>
+        <BoardSet
+          
+        />
+      </div>
     );
   }
 }

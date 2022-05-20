@@ -66,7 +66,7 @@ const AddTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
 
   return (
 
-    <div style={{border:'1px solid black', width: '70%', margin:'auto', marginTop:'6vh',minHeight: '300px'}}>
+    <div style={{border:'1px solid black', width: '70%', margin:'auto', marginTop:'6vh',minHeight: '800px'}}>
         <div style={{minHeight: '800px'}}>
         <div style={{display:'flex'}}>
           <input style={{fontSize:'30px', width:'100%',margin:'20px'}} 

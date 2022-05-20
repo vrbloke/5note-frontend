@@ -50,6 +50,7 @@ const Nav2 = (props) => {
           margines={'20px'}
           color={'white'}
           text={'Dodaj notatkę'}
+          fun={() => props.changeBoardState('addTask')}
         />
         </div>
         <div style={{display:'flex'}}>
@@ -65,6 +66,7 @@ const Nav2 = (props) => {
           margines={'20px'}
           color={'white'}
           text={'Zmień tablicę'}
+          fun={() => props.changeBoardState('boardSet')}
         />
         </div>
 

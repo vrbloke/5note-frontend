@@ -32,6 +32,7 @@ const Nav = (props) => {
           margines={'0 auto'}
           color={'white'}
           text={'Zmień tablicę'}
+          fun={() => props.changeBoardState('boardSet')}
         />
     </div>
   )
