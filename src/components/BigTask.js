@@ -34,7 +34,7 @@ const users=[
 
 
 
-const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
+const BigTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
 
   const plainText = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.';
   const content = ContentState.createFromText(tresc);
@@ -134,10 +134,10 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
   
   return (
 
-    <div style={{border:'1px solid black', width: '70%', margin:'auto', marginTop:'6vh',height: '800px'}}>
+    <div style={{border:'1px solid black', width: '70%', margin:'auto', marginTop:'6vh',minHeight: '800px'}}>
       {!showEditor && <div style={{display:'flex',padding:'2vh'}}>
         <Button
-          fun={() => {setShowEditor(true)}}
+          fun={() => {{setShowEditor(true);funkcja(false)}}}
           width_p={'15%'}
           marginesTop={'auto'}
           margines={'20px'}
@@ -181,14 +181,15 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
       </div>}
 
       { 
-        showEditor && <div>
+        showEditor && <div style={{minHeight: '800px'}}>
         <div style={{display:'flex'}}>
           <Button
-            fun={() => {setShowEditor(false)}}
+            fun={() => {{setShowEditor(false);funkcja(true)}}}
             width_p={'25%'}
             marginesTop={'15px'}
             margines={'50px'}
             text={"Cofnij"}
+            
           />
           <input style={{fontSize:'30px', width:'100%',margin:'20px'}} 
             defaultValue={tytul}
@@ -213,13 +214,12 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,onClose}) => {
   wrapperClassName="wrapperClassName"
   editorClassName="editorClassName"
           />  */}
-          <TextEditor setValue={setValue}/>
-          {value}
+          <TextEditor setValue={setValue} tresc={tresc}/>
         </div>
         <input style={{fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi}/>
         <Button
           //fun={() => {setShowEditor(false)}}
-          fun={() => {handleOnClick()}}
+          fun={() => {{handleOnClick();funkcja(true);setShowEditor(false)}}}
           width_p={'15%'}
           marginesTop={'15px'}
           margines={'auto'}

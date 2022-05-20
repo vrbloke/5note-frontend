@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import Task from "./Task";
 import BigTask from "./BigTask";
 
-const Board = (props) => {
+const Board = (props,{funkcja}) => {
 const [showTasks, setShowTasks] = React.useState(true)
 const [id, setId] = React.useState(0)
 
@@ -26,6 +26,7 @@ const [id, setId] = React.useState(0)
       data={props.notatki[id].data}
       priorytet={props.notatki[id].priorytet}
       tagi={props.notatki[id].tagi}
+      funkcja={()=>funkcja}
       />
       </div> }
     </div> 
