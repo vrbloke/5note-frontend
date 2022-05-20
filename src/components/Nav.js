@@ -25,6 +25,7 @@ const Nav = (props) => {
           margines={'0 auto'}
           color={'white'}
           text={'Dodaj notatkę'}
+          fun={() => props.changeBoardState('addTask')}
         />
         <Button
           marginesTop={'2vh'}

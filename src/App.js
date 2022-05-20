@@ -12,6 +12,7 @@ import BigTask from './components/BigTask';
 import Account from './components/Account';
 import PasswordChange from './components/PasswordChange';
 import Groups from './components/Groups';
+import AddTask from './components/AddTask';
 
 function App() {
 
@@ -70,7 +71,7 @@ function App() {
     if(format==='lista')
     {
       return(
-        <div style={{display:'flex'}}>
+        <div style={{display:'flex', background: bgColor}}>
           {showNav && <Nav2 changeBoardState={setBoardState}
            notatki={Tasks}
            fun={f}/>}
@@ -103,7 +104,6 @@ function App() {
                   notatki={Tasks}
                   on
                   funkcja={setShowNav}
-                  
             />
           <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setBoardState('settings')}}/>
         </div>
@@ -186,6 +186,27 @@ function App() {
         </div>
         <PasswordChange changeBoardState={setBoardState}/>
       </div>
+    );
+  }
+  else if(boardState==='addTask'){
+    return(
+      <div style={{display: 'flex', background: bgColor}}>
+      <div className="buttons" style={{margin: "50px"}}>
+      <Button 
+      margines={'0 auto'}
+      text={"Strona główna"} 
+      fun={() => {setBoardState('board')}}
+      color={"white"}/>
+      </div>
+      <AddTask
+        form={format}
+        tytul={Tasks[numTask].tytul}
+        tresc={Tasks[numTask].tresc}
+        data={Tasks[numTask].data}
+        priorytet={Tasks[numTask].priorytet}
+        tagi={Tasks[numTask].tagi}
+        funkcja={setBoardState}/>
+    </div>
     );
   }
 }
