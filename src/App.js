@@ -15,6 +15,8 @@ import Groups from './components/Groups';
 import AddTask from './components/AddTask';
 import BoardSet from './components/BoardSet';
 import BoardsJson from './Boards.json' 
+import RegistrationForm from './components/RegistrationForm';
+import LoginForm from './components/LoginForm';
 
 function App() {
 
@@ -31,7 +33,7 @@ function App() {
   const [boardId, setBoardId] = useState(0);
   const [showNav, setShowNav] = React.useState(true);
 
-  const [boardState, setBoardState] = useState('board');
+  const [boardState, setBoardState] = useState('pies');
 
   function f()
   {
@@ -60,7 +62,7 @@ function App() {
             tagi={Boards[boardId].notatki[numTask].tagi}
             funkcja={setShowNav}
           />
-          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',marginTop:'10px',color:'white',marginTop:'40px'}} onClick={() => {setBoardState('settings')}}/>
+          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',color:'white',marginTop:'40px'}} onClick={() => {setBoardState('settings')}}/>
           </div>
   
         );
@@ -84,7 +86,6 @@ function App() {
           </div>
         );
       }
-    break;
     case  'settings':
       return (
         <div className="App" style={{background: bgColor}}>
@@ -194,8 +195,27 @@ function App() {
           changeBoard={setBoardId}
           />
         </div>
-      ); 
+      );
+      case 'register':
+       return(
+         <div className="App" style={{display:'flex', background: bgColor}}>
+         <div className="buttons" style={{margin: "50px"}}>
+          <Button 
+          margines={'0 auto'}
+          text={"Wróć do logowania"} 
+          fun={() => {setBoardState('login')}}
+          color={"white"}/>
+          </div>
 
+         <RegistrationForm/>
+         </div>
+       )
+      default:
+        return(
+          <div className="App" style={{display:'flex', background: bgColor}}>
+          <LoginForm changeBoardState={setBoardState}/>
+          </div>
+        )
 
   }
 
