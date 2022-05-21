@@ -1,13 +1,14 @@
 import React from 'react'
-// import Avatar from 'react-avatar';
-import Button from './Button'
+import MiniBoard from './MiniBoard'
 
 
 const BoardSet = (props) => {
 
 return(
-    <div style={{border: "1px solid white", padding: "50px", marginLeft: "10%", marginTop: "5%", width: "400px", height: "500px", borderRadius: "12px", color: "lightgray", overflowY: "scroll"}}>
-      
+    <div style={{border: "1px solid white", padding: "50px", marginLeft: "5%", marginTop: "5%", width: "800px", height: "500px", borderRadius: "12px", color: "lightgray", overflowY: "scroll"}}>
+        {(props.boards).map((item) => (
+          <MiniBoard {...item}/>
+         ))}
     </div>
   );
 }

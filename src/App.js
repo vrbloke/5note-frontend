@@ -14,48 +14,21 @@ import PasswordChange from './components/PasswordChange';
 import Groups from './components/Groups';
 import AddTask from './components/AddTask';
 import BoardSet from './components/BoardSet';
+import BoardsJson from './Boards.json' 
 
 function App() {
 
 
   //PSEUDO BAZA DANYCH NOTATEK
-  const Tasks = [
-    {
-      id: '0',
-      tytul: 'Tytuł 1',
-      tresc: "Treść notatki 1",
-      data: "2022-05-01",
-      priorytet: 1,
-      tagi:['abc',"aai"]
-    },
-
-    {
-      id: '1',
-      tytul: 'Tytuł 2',
-      tresc: "Treść notatki 2",
-      data: "2022-05-02",
-      priorytet: 2,
-      tagi:[]
-    },
-
-    {
-      id: '2',
-      tytul: 'Tytuł 3',
-      tresc: "Treść notatki 3",
-      data: "2022-05-03",
-      priorytet: 3,
-      tagi:[]
-    }
-  ];
-
-
-
+  const Boards = BoardsJson
+  
   const [bgColor, setBgColor] = useState('#3F3939');
   const [textColor, setTextColor] = useState('#000000');
   const [textSize, setTextSize] = useState('15');
   const [titleSize, setTitleSize] = useState('25');
   const [format, setFormat] = useState("tablica");
   const [numTask, setNumTask] = useState(1);
+  const [boardId, setBoardId] = useState(0);
   const [showNav, setShowNav] = React.useState(true);
 
   const [boardState, setBoardState] = useState('board');
@@ -74,16 +47,16 @@ function App() {
       return(
         <div style={{display:'flex', background: bgColor}}>
           {showNav && <Nav2 changeBoardState={setBoardState}
-           notatki={Tasks}
+           notatki={Boards[boardId].notatki}
            fun={f}/>}
            
           <BigTask
             form={format}
-            tytul={Tasks[numTask].tytul}
-            tresc={Tasks[numTask].tresc}
-            data={Tasks[numTask].data}
-            priorytet={Tasks[numTask].priorytet}
-            tagi={Tasks[numTask].tagi}
+            tytul={Boards[boardId].notatki[numTask].tytul}
+            tresc={Boards[boardId].notatki[numTask].tresc}
+            data={Boards[boardId].notatki[numTask].data}
+            priorytet={Boards[boardId].notatki[numTask].priorytet}
+            tagi={Boards[boardId].notatki[numTask].tagi}
             funkcja={setShowNav}
           />
           <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',marginTop:'10px'}} onClick={() => {setBoardState('settings')}}/>
@@ -102,7 +75,7 @@ function App() {
                   isSample={false}
                   format={format}
                   // notatki={['1','b']}
-                  notatki={Tasks}
+                  notatki={Boards[boardId].notatki}
                   on
                   funkcja={setShowNav}
             />
@@ -201,11 +174,11 @@ function App() {
       </div>
       <AddTask
         form={format}
-        tytul={Tasks[numTask].tytul}
-        tresc={Tasks[numTask].tresc}
-        data={Tasks[numTask].data}
-        priorytet={Tasks[numTask].priorytet}
-        tagi={Tasks[numTask].tagi}
+        tytul={Boards[boardId].notatki[numTask].tytul}
+        tresc={Boards[boardId].notatki[numTask].tresc}
+        data={Boards[boardId].notatki[numTask].data}
+        priorytet={Boards[boardId].notatki[numTask].priorytet}
+        tagi={Boards[boardId].notatki[numTask].tagi}
         funkcja={setBoardState}/>
     </div>
     );
@@ -221,7 +194,8 @@ function App() {
         color={"white"}/>
         </div>
         <BoardSet
-          
+        boards={Boards}
+        changeBoard={setBoardId}
         />
       </div>
     );
