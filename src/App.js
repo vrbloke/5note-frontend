@@ -26,7 +26,7 @@ function App() {
   const [textColor, setTextColor] = useState('#000000');
   const [textSize, setTextSize] = useState('15');
   const [titleSize, setTitleSize] = useState('25');
-  const [format, setFormat] = useState("tablica");
+  const [format, setFormat] = useState("lista");
   const [numTask, setNumTask] = useState(1);
   const [boardId, setBoardId] = useState(0);
   const [showNav, setShowNav] = React.useState(true);
@@ -59,7 +59,7 @@ function App() {
             tagi={Boards[boardId].notatki[numTask].tagi}
             funkcja={setShowNav}
           />
-          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',marginTop:'10px'}} onClick={() => {setBoardState('settings')}}/>
+          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',marginTop:'10px',color:'white',marginTop:'40px'}} onClick={() => {setBoardState('settings')}}/>
         </div>
   
       );

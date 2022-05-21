@@ -71,7 +71,8 @@ const Nav2 = (props) => {
         </div>
 
         <div  style={{display:'flex'}}>
-        <select style={{margin:'20px', fontSize:'20px', width:'200px', padding:'3px',marginTop:'30px'}}>
+        
+        <select style={{margin:'20px', fontSize:'20px', width:'200px', padding:'3px',marginTop:'33px'}}>
             <option selected value=''>Sortuj</option>
             <option value='data_d'>Data (od najstarszej)</option>
             <option value='data__g'>Data (od najnowszej)</option>
@@ -144,9 +145,9 @@ const Nav2 = (props) => {
         <div>
             <div style={{marginTop:'30px'}} >
 
-          <DraggableList width={300} height={50} rowSize={1}>
+          <DraggableList width={340} height={50} rowSize={1}>
             {(props.notatki).map((item) => (
-              <div key={item.id} style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}} onDoubleClick={props.fun}>{item.tytul}
+              <div key={item.id} style={{border:'1px solid black', marginLeft:"20px", fontSize:'20px',padding:'5px',textAlign:'center',backgroundColor:'white',borderRadius:'24px'}} onDoubleClick={props.fun}>{item.tytul}
             </div> ))}      
          </DraggableList>
 

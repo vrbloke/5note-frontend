@@ -14,9 +14,9 @@ import "./task.css"
 import {RiCloseFill} from "react-icons/ri";
 import TextEditor from "./TextEditor.js"
 
+
 const AddTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
 
-  const plainText = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.';
   const content = ContentState.createFromText(tresc);
 
   const [editorState, setEditorState] = useState(() =>
@@ -66,16 +66,16 @@ const AddTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
 
   return (
 
-    <div style={{border:'1px solid black', width: '70%', margin:'auto', marginTop:'6vh',minHeight: '800px'}}>
+    <div style={{border:'1px solid black', width: '70%', margin:'auto', marginTop:'6vh',minHeight: '800px', borderRadius:'12px',backgroundColor:'#FFFFA7'}}>
         <div style={{minHeight: '800px'}}>
         <div style={{display:'flex'}}>
-          <input style={{fontSize:'30px', width:'100%',margin:'20px'}} 
+          <input style={{fontSize:'30px', width:'100%',margin:'20px',border:'1px solid black',borderRadius:'12px',textAlign:'center'}} 
             defaultValue={tytul}
             onChange={e =>setTytul(e.target.value)}
             />
-          <DatePicker selected={startDate} onChange={(date:Date) => setStartDate(date)} />
+          <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
           <input 
-          style={{fontSize:'20px', height:'30px', margin:'auto', marginRight:'50px', width:'50px', textAlign:'center'}}
+          style={{fontSize:'20px', height:'30px', margin:'auto', marginRight:'50px', width:'50px', textAlign:'center',borderRadius:'12px',backgroundColor:'white'}}
             type="number" 
             name="age" 
             defaultValue={prior}
@@ -84,7 +84,7 @@ const AddTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
             onChange={e =>setPriorytet(e.target.value)}
         />
         </div>
-      <div style={{ border: "1px solid black", padding: '2px', minHeight: '600px', width:'90%', margin:'auto'}}>
+      <div style={{backgroundColor:'white',padding: '2px', width:'90%', margin:'auto'}}>
          {/* <Editor
             editorState={editorState}
             onEditorStateChange={setEditorState}
@@ -94,7 +94,7 @@ const AddTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
           />  */}
           <TextEditor setValue={setValue} tresc={tresc}/>
         </div>
-        <input style={{fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi}/>
+        <input style={{ backgroundColor:'white',borderRadius:'6px',fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi}/>
         <Button
           //fun={() => {setShowEditor(false)}}
           fun={() => {{handleOnClick(); funkcja('board');}}}
