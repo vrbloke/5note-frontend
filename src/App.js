@@ -45,7 +45,7 @@ function App() {
     if(format==='lista')
     {
       return(
-        <div style={{display:'flex', background: bgColor}}>
+        <div className="App" style={{display:'flex', background: bgColor}}>
           {showNav && <Nav2 changeBoardState={setBoardState}
            notatki={Boards[boardId].notatki}
            fun={f}/>}
@@ -164,7 +164,7 @@ function App() {
   }
   else if(boardState==='addTask'){
     return(
-      <div style={{display: 'flex', background: bgColor}}>
+      <div className="App" style={{display: 'flex', background: bgColor}}>
       <div className="buttons" style={{margin: "50px"}}>
       <Button 
       margines={'0 auto'}
@@ -185,7 +185,7 @@ function App() {
   }
   else if(boardState==='boardSet'){
     return(
-      <div style={{display: 'flex', background: bgColor}}>
+      <div className="App" style={{display: 'flex', background: bgColor}}>
         <div className="buttons" style={{margin: "50px"}}>
         <Button 
         margines={'0 auto'}
