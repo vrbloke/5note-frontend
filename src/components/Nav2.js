@@ -87,25 +87,25 @@ const Nav2 = (props) => {
           fun={() => {setFiltr(!isFiltr);setTag(false)}}
         />
         </div>
-       {isFiltr && <div style={{border:'1px solid black', margin:'20px', paddingBottom:'20px'}}>
+       {isFiltr && <div style={{border:'1px solid white', margin:'20px', paddingBottom:'20px',borderRadius:'12px'}}>
            <div style={{display:'flex'}}>
                 <input 
-                    style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center'}}
+                    style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center',borderRadius:'12px'}}
                     type="number"
                     min={1}
                     max={10}
                 />
-                <p style={{fontSize:'20px', margin:'20px'}}>Górny limit priorytetu</p>
+                <p style={{fontSize:'20px', margin:'20px',color:'lightgray'}}>Górny limit priorytetu</p>
            </div>
            <div style={{display:'flex'}}>
                 <input 
-                    style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center'}}
+                    style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center',borderRadius:'12px'}}
                     type="number" 
                     min={1}
                     max={10}
 
                 />
-                <p style={{fontSize:'20px', margin:'20px'}}>Dolny limit priorytetu</p>
+                <p style={{fontSize:'20px', margin:'20px',color:'lightgray'}}>Dolny limit priorytetu</p>
            </div>
             <Button
                 text={'Tagi'}
@@ -115,9 +115,9 @@ const Nav2 = (props) => {
             />
         </div>}
 
-        {isTag && <div style={{fontSize:'20px',border:'1px solid black', margin:'20px'}}>
+        {isTag && <div style={{fontSize:'20px',border:'1px solid white', margin:'20px',borderRadius:'12px',color:'lightgray'}}>
             <input
-                style={{margin:'20px', fontSize:'20px'}}
+                style={{margin:'20px', fontSize:'20px',borderRadius:'12px'}}
                 type="checkbox"
                 //   checked={isChecked}
                 //   onChange={handleOnChange}

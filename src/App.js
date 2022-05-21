@@ -26,7 +26,7 @@ function App() {
   const [textColor, setTextColor] = useState('#000000');
   const [textSize, setTextSize] = useState('15');
   const [titleSize, setTitleSize] = useState('25');
-  const [format, setFormat] = useState("lista");
+  const [format, setFormat] = useState("tablica");
   const [numTask, setNumTask] = useState(1);
   const [boardId, setBoardId] = useState(0);
   const [showNav, setShowNav] = React.useState(true);
@@ -40,15 +40,16 @@ function App() {
     console.log('aaaaa');
   }
 
-  if(boardState==='board')
+  switch(boardState)
   {
-    if(format==='lista')
-    {
-      return(
-        <div className="App" style={{display:'flex', background: bgColor}}>
-          {showNav && <Nav2 changeBoardState={setBoardState}
-           notatki={Boards[boardId].notatki}
-           fun={f}/>}
+    case 'board':
+      if(format==='lista')
+      {
+        return(
+          <div className="App" style={{display:'flex', background: bgColor}}>
+            {showNav && <Nav2 changeBoardState={setBoardState}
+            notatki={Boards[boardId].notatki}
+            fun={f}/>}
            
           <BigTask
             form={format}
@@ -60,15 +61,15 @@ function App() {
             funkcja={setShowNav}
           />
           <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',marginTop:'10px',color:'white',marginTop:'40px'}} onClick={() => {setBoardState('settings')}}/>
-        </div>
+          </div>
   
-      );
-    }
-    else{
-      return (
-        <div className="App" style={{background: bgColor}}>
-          <Nav changeBoardState={setBoardState}/>
-          <Board 
+        );
+      }
+      else{
+        return (
+          <div className="App" style={{background: bgColor}}>
+            <Nav changeBoardState={setBoardState}/>
+            <Board 
                   textColor={textColor}
                   textSize={textSize}
                   titleSize={titleSize}
@@ -78,91 +79,87 @@ function App() {
                   notatki={Boards[boardId].notatki}
                   on
                   funkcja={setShowNav}
-            />
-          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setBoardState('settings')}}/>
+              />
+            <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setBoardState('settings')}}/>
+          </div>
+        );
+      }
+    break;
+    case  'settings':
+      return (
+        <div className="App" style={{background: bgColor}}>
+          <div className="buttons" style={{margin: "50px"}}>
+          <Button 
+          margines={'0 auto'}
+          text={"Strona główna"} 
+          fun={() => {setBoardState('board')}}
+          color={"white"}/>
+          <Task 
+          onIcon={() => {}} 
+          tytul={"Test"} 
+          tresc={"test test"} 
+          textColor={textColor}
+          textSize={textSize}
+          titleSize={titleSize}
+          isSample={true}/>
+          </div>
+          <Settings 
+          bgColor={bgColor} changeBgColor={setBgColor}
+          textColor={textColor} changeTextColor={setTextColor}
+          textSize={textSize} changeTextSize={setTextSize}
+          titleSize={titleSize} changeTitleSize={setTitleSize}
+          isSample={true}
+          format={format} changeFormat={setFormat}/>
+          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh', color:"white", marginTop:'56px'}} onClick={() => {setBoardState('board')}}/>
         </div>
       );
-    }
-  }
-  else if(boardState==='settings')
-  {
-    return (
-      <div className="App" style={{background: bgColor}}>
-        <div className="buttons" style={{margin: "50px"}}>
-        <Button 
-        margines={'0 auto'}
-        text={"Strona główna"} 
-        fun={() => {setBoardState('board')}}
-        color={"white"}/>
-        <Task 
-        onIcon={() => {}} 
-        tytul={"Test"} 
-        tresc={"test test"} 
-        textColor={textColor}
-        textSize={textSize}
-        titleSize={titleSize}
-        isSample={true}/>
+      
+    case 'groups':
+      return(
+        <div className="App" style={{background: bgColor}}>
+          <div className="buttons" style={{margin: "50px"}}>
+          <Button 
+          margines={'0 auto'}
+          text={"Strona główna"} 
+          fun={() => {setBoardState('board')}}
+          color={"white"}/>
+          </div>
+          <Groups/>
         </div>
-        <Settings 
-        bgColor={bgColor} changeBgColor={setBgColor}
-        textColor={textColor} changeTextColor={setTextColor}
-        textSize={textSize} changeTextSize={setTextSize}
-        titleSize={titleSize} changeTitleSize={setTitleSize}
-        isSample={true}
-        format={format} changeFormat={setFormat}/>
-        <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh', color:"white", marginTop:'56px'}} onClick={() => {setBoardState('board')}}/>
-      </div>
-    );
-  }
-  else if(boardState==='groups'){
-    return(
-      <div className="App" style={{background: bgColor}}>
-        <div className="buttons" style={{margin: "50px"}}>
-        <Button 
-        margines={'0 auto'}
-        text={"Strona główna"} 
-        fun={() => {setBoardState('board')}}
-        color={"white"}/>
+      );
+    case 'account':
+      return(
+        <div className="App" style={{background: bgColor}}>
+          <div className="buttons" style={{margin: "50px"}}>
+          <Button 
+          margines={'0 auto'}
+          text={"Strona główna"} 
+          fun={() => {setBoardState('board')}}
+          color={"white"}/>
+          </div>
+          <Account changeBoardState={setBoardState}/>
         </div>
-        <Groups/>
-      </div>
-    );
-  }
-  else if(boardState==='account'){
-    return(
-      <div className="App" style={{background: bgColor}}>
-        <div className="buttons" style={{margin: "50px"}}>
-        <Button 
-        margines={'0 auto'}
-        text={"Strona główna"} 
-        fun={() => {setBoardState('board')}}
-        color={"white"}/>
+      );
+    case 'passwordChange':
+      return(
+        <div className="App" style={{background: bgColor}}>
+          <div className="buttons" style={{margin: "50px"}}>
+          <Button 
+          margines={'0 auto'}
+          text={"Strona główna"} 
+          fun={() => {setBoardState('board')}}
+          color={"white"}/>
+          <Button 
+          marginesTop={'2vh'}
+          margines={'0 auto'}
+          text={"Konto"} 
+          fun={() => {setBoardState('account')}}
+          color={"white"}/>
+          </div>
+          <PasswordChange changeBoardState={setBoardState}/>
         </div>
-        <Account changeBoardState={setBoardState}/>
-      </div>
-    );
-  }
-  else if(boardState==='passwordChange'){
-    return(
-      <div className="App" style={{background: bgColor}}>
-        <div className="buttons" style={{margin: "50px"}}>
-        <Button 
-        margines={'0 auto'}
-        text={"Strona główna"} 
-        fun={() => {setBoardState('board')}}
-        color={"white"}/>
-        <Button 
-        marginesTop={'2vh'}
-        margines={'0 auto'}
-        text={"Konto"} 
-        fun={() => {setBoardState('account')}}
-        color={"white"}/>
-        </div>
-        <PasswordChange changeBoardState={setBoardState}/>
-      </div>
-    );
-  }
-  else if(boardState==='addTask'){
+      );
+    case 'addTask': 
     return(
       <div className="App" style={{display: 'flex', background: bgColor}}>
       <div className="buttons" style={{margin: "50px"}}>
@@ -182,24 +179,27 @@ function App() {
         funkcja={setBoardState}/>
     </div>
     );
-  }
-  else if(boardState==='boardSet'){
-    return(
-      <div className="App" style={{display: 'flex', background: bgColor}}>
-        <div className="buttons" style={{margin: "50px"}}>
-        <Button 
-        margines={'0 auto'}
-        text={"Strona główna"} 
-        fun={() => {setBoardState('board')}}
-        color={"white"}/>
+    case 'boardSet':
+      return(
+        <div className="App" style={{display: 'flex', background: bgColor}}>
+          <div className="buttons" style={{margin: "50px"}}>
+          <Button 
+          margines={'0 auto'}
+          text={"Strona główna"} 
+          fun={() => {setBoardState('board')}}
+          color={"white"}/>
+          </div>
+          <BoardSet
+          boards={Boards}
+          changeBoard={setBoardId}
+          />
         </div>
-        <BoardSet
-        boards={Boards}
-        changeBoard={setBoardId}
-        />
-      </div>
-    );
+      ); 
+
+
   }
+
+ 
 }
 
 
