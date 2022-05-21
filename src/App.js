@@ -35,7 +35,7 @@ function App() {
 
   function f()
   {
-    {setNumTask(1)};
+    setNumTask(1);
     console.log(numTask);
     console.log('aaaaa');
   }

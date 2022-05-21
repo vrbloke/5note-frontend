@@ -1,13 +1,11 @@
-import React,{useState, useEffect,MouseEvent} from 'react'
+import React,{useState, useEffect} from 'react'
 import Button from './Button'
-import { Editor } from "react-draft-wysiwyg";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {FaUserPlus,FaUsers} from "react-icons/fa"
 import {IoClose} from "react-icons/io5"
 import {CgProfile} from "react-icons/cg"
 import {MdAdd} from "react-icons/md"
-import {BiDotsVerticalRounded} from "react-icons/bi"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./task.css"
@@ -36,7 +34,6 @@ const users=[
 
 const BigTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
 
-  const plainText = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.';
   const content = ContentState.createFromText(tresc);
 
   const [editorState, setEditorState] = useState(() =>
@@ -213,7 +210,7 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
             toolbarClassName="toolbarClassName"
   wrapperClassName="wrapperClassName"
   editorClassName="editorClassName"
-          />  */}
+      />  */}
           <TextEditor setValue={setValue} tresc={tresc}/>
         </div>
         <input style={{fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi}/>

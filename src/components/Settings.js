@@ -1,11 +1,8 @@
 import React from 'react'
 import { SketchPicker } from 'react-color';
-import { BsYoutube } from 'react-icons/bs'
-import Button from './Button'
-import Task from './Task'
 import Select from 'react-select'
 import NumericInput from 'react-numeric-input';
-import { style } from 'react-numeric-input';
+
 
 const Settings = (props) => {
 

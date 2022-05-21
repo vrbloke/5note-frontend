@@ -1,7 +1,6 @@
-import React,{useState} from 'react'
-import ReactDOM from "react-dom";
+import React from 'react'
 import MiniTask from "./MiniTask";
-import BigTask from "./BigTask";
+
 
 const MiniBoard = (item) => {
 

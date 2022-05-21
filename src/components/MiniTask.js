@@ -1,6 +1,4 @@
 import React,{ useRef } from 'react'
-import Draggable from "react-draggable";
-import {BsArrowsMove} from "react-icons/bs";
 
 const MiniTask = (props) => {
 
