@@ -193,6 +193,8 @@ function App() {
           <BoardSet
           boards={Boards}
           changeBoard={setBoardId}
+          changeState={setBoardState}
+          format={format}
           />
         </div>
       );
