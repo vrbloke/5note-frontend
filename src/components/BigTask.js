@@ -204,13 +204,6 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
         />
         </div>
       <div style={{ backgroundColor: 'white',padding: '2px', width:'90%', margin:'auto'}}>
-         {/* <Editor
-            editorState={editorState}
-            onEditorStateChange={setEditorState}
-            toolbarClassName="toolbarClassName"
-  wrapperClassName="wrapperClassName"
-  editorClassName="editorClassName"
-      />  */}
           <TextEditor setValue={setValue} tresc={tresc}/>
         </div>
         <input style={{borderRadius:'6px',fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi}/>
