@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Button from './Button'
-import { EditorState, ContentState, convertToRaw } from "draft-js";
+import { EditorState, ContentState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { FaUserPlus, FaUsers } from "react-icons/fa"
 import { IoClose } from "react-icons/io5"
@@ -134,7 +134,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
     <div style={{ border: '1px solid black', width: '70%', margin: 'auto', marginTop: '6vh', minHeight: '800px', borderRadius: '12px', backgroundColor: '#FFFFA7' }}>
       {!showEditor && <div style={{ display: 'flex', padding: '2vh' }}>
         <Button
-          fun={() => { { setShowEditor(true); funkcja(false) } }}
+          fun={() => {  setShowEditor(true); funkcja(false)  }}
           width_p={'15%'}
           marginesTop={'auto'}
           margines={'20px'}
@@ -181,7 +181,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
         showEditor && <div style={{ minHeight: '800px' }}>
           <div style={{ display: 'flex' }}>
             <Button
-              fun={() => { { setShowEditor(false); funkcja(true) } }}
+              fun={() => {  setShowEditor(false); funkcja(true)  }}
               width_p={'25%'}
               marginesTop={'15px'}
               margines={'50px'}
@@ -209,7 +209,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
           <input style={{ borderRadius: '6px', fontSize: '20px', width: '90%', marginTop: '10px' }} defaultValue={tagi} />
           <Button
             //fun={() => {setShowEditor(false)}}
-            fun={() => { { handleOnClick(); funkcja(true); setShowEditor(false) } }}
+            fun={() => {  handleOnClick(); funkcja(true); setShowEditor(false) }}
             width_p={'15%'}
             marginesTop={'15px'}
             margines={'auto'}

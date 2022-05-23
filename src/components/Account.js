@@ -23,7 +23,7 @@ const Account = (props) => {
               width: 150,
               height: 150,
               borderRadius: 150 / 2,
-              marginLeft: 25,
+              marginLeft: 40,
             }}
           />
         </div>
@@ -55,7 +55,7 @@ const Account = (props) => {
         </div>
       </div>
       <div style={{ display: "flex", margin: "20px" }}>
-        <div style={{ display: "block", margin: "5px", marginRight: "75px" }}>
+        <div style={{ display: "block", margin: "5px", marginRight: "85px" }}>
           <Button
             margines={"0 auto"}
             text={"Zmień hasło"}
@@ -70,7 +70,7 @@ const Account = (props) => {
             margines={"0 auto"}
             text={"Wyloguj"}
             fun={() => {
-              alert("wylogowano");
+              props.changeBoardState("logout");
             }}
             color={"white"}
           />

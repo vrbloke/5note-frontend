@@ -33,7 +33,7 @@ function App() {
   const [boardId, setBoardId] = useState(0);
   const [showNav, setShowNav] = useState(true);
 
-  const [boardState, setBoardState] = useState('pies');
+  const [boardState, setBoardState] = useState('start');
 
   const f = (id) =>
   {
