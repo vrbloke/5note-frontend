@@ -1,5 +1,5 @@
 import React from 'react'
-// import Avatar from 'react-avatar';
+import { Image } from 'react-native'
 import Button from './Button'
 
 
@@ -9,7 +9,10 @@ return(
       <div style={{border: "1px solid white", padding: "50px", marginLeft: "20%", marginTop: "8%",height: "200px",borderRadius: "12px",color: "lightgray"}}>
         <div style={{display: "flex"}}>
           <div style={{display: "block", width: "50%"}}>
-          {/* <Avatar name={"H"} round={true} style={{margin: "20px"}}></Avatar> */}
+          <Image
+            source={require('../sample.jpg')}
+            style={{width: 150, height: 150, borderRadius: 150/2, marginLeft: 25}}
+          />
           </div>
           <div style={{display: "block",marginLeft: "100px"}}>
             <h2>Login</h2>
