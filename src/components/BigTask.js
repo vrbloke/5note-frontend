@@ -1,13 +1,11 @@
-import React,{useState, useEffect,MouseEvent} from 'react'
+import React,{useState, useEffect} from 'react'
 import Button from './Button'
-import { Editor } from "react-draft-wysiwyg";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {FaUserPlus,FaUsers} from "react-icons/fa"
 import {IoClose} from "react-icons/io5"
 import {CgProfile} from "react-icons/cg"
 import {MdAdd} from "react-icons/md"
-import {BiDotsVerticalRounded} from "react-icons/bi"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./task.css"
@@ -36,7 +34,6 @@ const users=[
 
 const BigTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
 
-  const plainText = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.';
   const content = ContentState.createFromText(tresc);
 
   const [editorState, setEditorState] = useState(() =>
@@ -134,7 +131,7 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
   
   return (
 
-    <div style={{border:'1px solid black', width: '70%', margin:'auto', marginTop:'6vh',minHeight: '800px'}}>
+    <div style={{border:'1px solid black', width: '70%', margin:'auto', marginTop:'6vh',minHeight: '800px', borderRadius:'12px',backgroundColor:'#FFFFA7'}}>
       {!showEditor && <div style={{display:'flex',padding:'2vh'}}>
         <Button
           fun={() => {{setShowEditor(true);funkcja(false)}}}
@@ -151,26 +148,26 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
       
       {!showEditor && <div style={{display:'flex',maxHeight: '800px'}}>
 
-        {showAllUsers &&<div style={{border: '1px solid black', margin: '25px'}}>
+        {showAllUsers &&<div style={{border: '1px solid black', margin: '25px',borderRadius:'12px'}}>
             <div>
               {listUsrs.map((item) => (
-                <div key={item.id} style={{border: '1px solid black', width:'300px', margin: '10px',display:'flex'}}>
-                  <CgProfile style ={{fontSize:'4vh', margin: 'auto', marginLeft:'10px'}}/>
+                <div key={item.id} style={{border: '1px solid black', borderRadius:'12px',width:'300px', margin: '10px',display:'flex'}}>
+                  <CgProfile style ={{borderRadius:'12px',fontSize:'4vh', margin: 'auto', marginLeft:'10px'}}/>
                   <p style={{fontSize:'20px', fontWeight:'bold'}}>{item.nick}</p>
-                  <RiCloseFill style={{color:'red', margin:'auto',marginRight:'10px', fontSize:'30px'}} onClick={() =>handleRemove(item.id)}/>
+                  <RiCloseFill style={{color:'black', margin:'auto',marginRight:'10px', fontSize:'30px'}} onClick={() =>handleRemove(item.id)}/>
                 </div>
               ))}
             </div>
 
         </div>}
 
-        {showAddUsers && <div style={{border: '1px solid black', padding:'5px', height: '200px', backgroundColor:'white', margin: '25px'}}>
-          <input style={{width:'300px', fontSize:'20px'}}placeholder="Search" onKeyPress={handleKeyPress} onChange={handleChange}/>
+        {showAddUsers && <div style={{border: '1px solid black', padding:'5px', height: '200px', backgroundColor:'white', margin: '25px' ,borderRadius:'12px'}}>
+          <input style={{borderRadius:'6px',width:'300px', fontSize:'20px'}}placeholder="Search" onKeyPress={handleKeyPress} onChange={handleChange}/>
           { usrId >=0 &&
-          <div style={{border: '1px solid black', width:'300px', margin: '10px',display:'flex'}}>
+          <div style={{border: '1px solid black', borderRadius:'12px', width:'300px', margin: '10px',display:'flex'}}>
             <CgProfile style ={{fontSize:'4vh', margin: 'auto', marginLeft:'10px'}}/>            
               <p style={{fontSize:'20px', fontWeight:'bold'}}>{users[usrId].nick}</p>          
-            <MdAdd style={{fontSize:'4vh', margin:'auto', marginRight:'10px', color:'green'}}/>          
+            <MdAdd style={{fontSize:'4vh', margin:'auto', marginRight:'10px', color:'black'}}/>          
           </div>
           }
         </div>}
@@ -191,13 +188,13 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
             text={"Cofnij"}
             
           />
-          <input style={{fontSize:'30px', width:'100%',margin:'20px'}} 
+          <input style={{fontSize:'30px', width:'100%',margin:'20px',borderRadius:'12px',border:'1px solid black',textAlign:'center'}} 
             defaultValue={tytul}
             onChange={e =>setTytul(e.target.value)}
             />
-          <DatePicker selected={startDate} onChange={(date:Date) => setStartDate(date)} />
+          <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
           <input 
-          style={{fontSize:'20px', height:'30px', margin:'auto', marginRight:'50px', width:'50px', textAlign:'center'}}
+          style={{borderRadius:'12px',fontSize:'20px', height:'30px', margin:'auto', marginRight:'50px', width:'50px', textAlign:'center'}}
             type="number" 
             name="age" 
             defaultValue={prior}
@@ -206,17 +203,10 @@ const BigTask = ({form,tytul,tresc,data,priorytet,tagi,funkcja,onClose,}) => {
             onChange={e =>setPriorytet(e.target.value)}
         />
         </div>
-      <div style={{ border: "1px solid black", padding: '2px', minHeight: '600px', width:'90%', margin:'auto'}}>
-         {/* <Editor
-            editorState={editorState}
-            onEditorStateChange={setEditorState}
-            toolbarClassName="toolbarClassName"
-  wrapperClassName="wrapperClassName"
-  editorClassName="editorClassName"
-          />  */}
+      <div style={{ backgroundColor: 'white',padding: '2px', width:'90%', margin:'auto'}}>
           <TextEditor setValue={setValue} tresc={tresc}/>
         </div>
-        <input style={{fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi}/>
+        <input style={{borderRadius:'6px',fontSize:'20px', width:'90%', marginTop:'10px'}} defaultValue={tagi}/>
         <Button
           //fun={() => {setShowEditor(false)}}
           fun={() => {{handleOnClick();funkcja(true);setShowEditor(false)}}}

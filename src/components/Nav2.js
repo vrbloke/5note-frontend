@@ -50,6 +50,7 @@ const Nav2 = (props) => {
           margines={'20px'}
           color={'white'}
           text={'Dodaj notatkę'}
+          fun={() => props.changeBoardState('addTask')}
         />
         </div>
         <div style={{display:'flex'}}>
@@ -65,11 +66,13 @@ const Nav2 = (props) => {
           margines={'20px'}
           color={'white'}
           text={'Zmień tablicę'}
+          fun={() => props.changeBoardState('boardSet')}
         />
         </div>
 
         <div  style={{display:'flex'}}>
-        <select style={{margin:'20px', fontSize:'20px', width:'200px', padding:'3px',marginTop:'30px'}}>
+        
+        <select style={{margin:'20px', fontSize:'20px', width:'200px', padding:'3px',marginTop:'33px'}}>
             <option selected value=''>Sortuj</option>
             <option value='data_d'>Data (od najstarszej)</option>
             <option value='data__g'>Data (od najnowszej)</option>
@@ -84,25 +87,25 @@ const Nav2 = (props) => {
           fun={() => {setFiltr(!isFiltr);setTag(false)}}
         />
         </div>
-       {isFiltr && <div style={{border:'1px solid black', margin:'20px', paddingBottom:'20px'}}>
+       {isFiltr && <div style={{border:'1px solid white', margin:'20px', paddingBottom:'20px',borderRadius:'12px'}}>
            <div style={{display:'flex'}}>
                 <input 
-                    style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center'}}
+                    style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center',borderRadius:'12px'}}
                     type="number"
                     min={1}
                     max={10}
                 />
-                <p style={{fontSize:'20px', margin:'20px'}}>Górny limit priorytetu</p>
+                <p style={{fontSize:'20px', margin:'20px',color:'lightgray'}}>Górny limit priorytetu</p>
            </div>
            <div style={{display:'flex'}}>
                 <input 
-                    style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center'}}
+                    style={{fontSize:'20px', height:'30px', marginLeft:'20px', marginTop:'20px', width:'50px', textAlign:'center',borderRadius:'12px'}}
                     type="number" 
                     min={1}
                     max={10}
 
                 />
-                <p style={{fontSize:'20px', margin:'20px'}}>Dolny limit priorytetu</p>
+                <p style={{fontSize:'20px', margin:'20px',color:'lightgray'}}>Dolny limit priorytetu</p>
            </div>
             <Button
                 text={'Tagi'}
@@ -112,9 +115,9 @@ const Nav2 = (props) => {
             />
         </div>}
 
-        {isTag && <div style={{fontSize:'20px',border:'1px solid black', margin:'20px'}}>
+        {isTag && <div style={{fontSize:'20px',border:'1px solid white', margin:'20px',borderRadius:'12px',color:'lightgray'}}>
             <input
-                style={{margin:'20px', fontSize:'20px'}}
+                style={{margin:'20px', fontSize:'20px',borderRadius:'12px'}}
                 type="checkbox"
                 //   checked={isChecked}
                 //   onChange={handleOnChange}
@@ -142,9 +145,9 @@ const Nav2 = (props) => {
         <div>
             <div style={{marginTop:'30px'}} >
 
-          <DraggableList width={300} height={50} rowSize={1}>
+          <DraggableList width={340} height={50} rowSize={1}>
             {(props.notatki).map((item) => (
-              <div key={item.id} style={{border:'1px solid black', marginLeft:"50px", fontSize:'20px',padding:'5px',textAlign:'center'}} onDoubleClick={props.fun}>{item.tytul}
+              <div key={item.id} style={{border:'1px solid black', marginLeft:"20px", fontSize:'20px',padding:'5px',textAlign:'center',backgroundColor:'white',borderRadius:'24px'}} onDoubleClick={props.fun}>{item.tytul}
             </div> ))}      
          </DraggableList>
 

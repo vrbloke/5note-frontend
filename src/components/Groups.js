@@ -1,9 +1,8 @@
 import {FaUserPlus, FaSignOutAlt} from "react-icons/fa"
 import React, {useState} from 'react'
-// import ReactRoundedImage from "react-rounded-image"; 
+import {Image} from 'react-native'
 import Button from './Button'
-import { margin } from "@mui/system";
-
+import GroupsJson from '../Groups.json'
 
 
 const Groups = (props) => {
@@ -42,44 +41,28 @@ return(
             <th>Użytkownicy</th>
             <th style={{textAlign:'left'}}>Akcje</th>
           </tr>
-          <tr>
-            <td>grupa1</td>
-            <td>&#9733;</td>
-            <td><div style={{display:'flex'}}>
-            {/* <Avatar size='30px' round={true} name={"H"}/>
-            <Avatar size='30px' round={true} name={"P"}/>
-            <Avatar size='30px' round={true} name={"O"}/> */}
-            </div></td>
-            <td><div style={{display:'flex'}}>
-            <FaUserPlus onClick={()=> alert()}/>
-            <FaSignOutAlt onClick={()=> alert()}/>
-            </div></td>
-          </tr>
-          <tr>
-            <td>grupa2</td>
-            <td>&#9734;</td>
-            <td><div style={{display:'flex'}}>
-            {/* <Avatar size='30px' round={true} name={"J"}/>
-            <Avatar size='30px' round={true} name={"T"}/> */}
-            </div></td>
-            <td><div style={{display:'flex'}}>
-            <FaUserPlus onClick={()=> alert() }/>
-            <FaSignOutAlt onClick={()=> alert()}/>
-            </div></td>
-          </tr>
-          <tr>
-            <td>grupa3</td>
-            <td>&#9733;</td>
-            <td><div style={{display:'flex'}}>
-            {/* <Avatar size='30px' round={true} name={"A"}/>
-            <Avatar size='30px' round={true} name={"B"}/>
-            <Avatar size='30px' round={true} name={"C"}/> */}
-            </div></td>
-            <td><div style={{display:'flex'}}>
-            <FaUserPlus onClick={()=> alert()}/>
-            <FaSignOutAlt onClick={()=> alert()}/>
-            </div></td>
-          </tr>
+          {GroupsJson.map((item) => {
+            return(
+              <tr>
+                <td>{item.nazwa}</td>
+                {item.haslo === "" ? <td>&#9734;</td> : <td>&#9734;</td>}
+                <td><div style={{display:'flex', marginLeft: '100px'}}>
+                {item.uzytkownicy.map((user) => {
+                  return(
+                    <Image
+                    source={require('../sample.jpg')}
+                    style={{width: 18, height: 18, borderRadius: 18/2, marginLeft: "5px"}}
+                    />
+                  )
+                })}
+                </div></td>
+                <td><div style={{display:'flex'}}>
+                <FaUserPlus onClick={()=> alert()}/>
+                <FaSignOutAlt onClick={()=> alert()}/>
+                </div></td>
+              </tr>
+            )
+          })}
         </table>
         </div>}
       {option === 'create' &&

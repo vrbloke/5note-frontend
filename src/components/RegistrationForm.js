@@ -1,33 +1,36 @@
-import React, {useState} from 'react';
-import '../index.css'
+import React from 'react'
 import Button from './Button'
 
-function RegistrationForm() {
-    return(
-      <div className="form">
-          <div className="form-body">
-              <div className="">
-                  <label className="form__label" for="firstName">Login </label>
-                  <input className="form__input" type="text" id="firstName" placeholder="First Name"/>
-              </div>
-              <div className="password">
-                  <label className="form__label" for="password">Haslo </label>
-                  <input className="form__input" type="password"  id="password" placeholder="Password"/>
-              </div>
-              <div className="confirm-password">
-                  <label className="form__label" for="confirmPassword">Powtorz haslo </label>
-                  <input className="form__input" type="password" id="confirmPassword" placeholder="Confirm Password"/>
-              </div>
-          </div>
-          <div class="footer">
-          <Button
-          marginesTop={'2vh'}
-          margines={'0 auto'}
-          color={'white'}
-          text={'Zarejestruj'}
-          />
-          </div>
-      </div>      
-    )       
+
+const RegistrationForm = (props) => {
+
+return(
+    <div style={{border: "1px solid white", padding: "50px", marginLeft: "20%",marginTop: "8%",height: "300px",borderRadius: "12px",color: "lightgray"}}>
+        <div style={{flexDirection: "column", width: "200px"}}>
+        <form>
+            <label>
+                <p>Login:</p>
+                <input type="text" name="login" />
+            </label>
+            <label>
+                <p>Hasło:</p>
+                <input type="password" name="Password" />
+            </label>
+            <label>
+                <p>Powtórz hasło:</p>
+                <input type="password" name="repeatPassword" />
+            </label>
+        </form>
+        <Button 
+        marginesTop={'2vh'}
+        margines={'0 auto'}
+        text={"Zarejstruj"} 
+        fun={() => {alert("Uzytkownik został zarejestrowany")}}
+        color={"white"}/>
+        </div>
+    </div>
+  );
 }
-export default RegistrationForm;
+
+
+export default RegistrationForm
