@@ -126,7 +126,7 @@ const AddTask = ({
   wrapperClassName="wrapperClassName"
   editorClassName="editorClassName"
           />  */}
-          <TextEditor setValue={setValue} tresc={tresc} />
+          <TextEditor setValue={setValue} tresc={tresc} fun={setTresc} />
         </div>
         <input
           style={{
@@ -137,6 +137,7 @@ const AddTask = ({
             marginTop: "10px",
           }}
           defaultValue={tagi}
+
         />
         <Button
           //fun={() => {setShowEditor(false)}}
