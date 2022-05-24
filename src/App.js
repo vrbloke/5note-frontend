@@ -5,6 +5,7 @@ import Board from './components/Board'
 import Settings from './components/Settings'
 import {AiTwotoneSetting} from "react-icons/ai";
 import React, { useState } from 'react';
+import TextField from "@material-ui/core/TextField";
 
 import Button from './components/Button';
 import Task from './components/Task';
@@ -14,6 +15,7 @@ import PasswordChange from './components/PasswordChange';
 import Groups from './components/Groups';
 import AddTask from './components/AddTask';
 import BoardSet from './components/BoardSet';
+import NewBoard from './components/NewBoard';
 import BoardsJson from './Boards.json' 
 import RegistrationForm from './components/RegistrationForm';
 import LoginForm from './components/LoginForm';
@@ -32,6 +34,7 @@ function App() {
   const [numTask, setNumTask] = useState(1);
   const [boardId, setBoardId] = useState(0);
   const [showNav, setShowNav] = useState(true);
+  const [searchInput, setSearchInput] = useState("");
 
   const [boardState, setBoardState] = useState('start');
 
@@ -40,6 +43,10 @@ function App() {
     setNumTask(id);
     console.log(id);
     console.log('aaaaas');
+  }
+
+  let searchInputHandler = (e) => {
+
   }
 
   // return(
@@ -193,9 +200,27 @@ const boardSetState = () => (
   <div className="App" style={{display: 'flex', background: bgColor}}>
     <div className="buttons" style={{margin: "50px"}}>
     <Button 
+    marginesTop={"2vh"}
     margines={'0 auto'}
     text={"Strona główna"} 
     fun={() => {setBoardState('board')}}
+    color={"white"}/>
+    <Button 
+    marginesTop={"2vh"}
+    margines={'0 auto'}
+    text={"Nowa tablica"} 
+    fun={() => {setBoardState('newBoard')}}
+    color={"white"}/>
+    <input style={{marginTop: "2vh", width: "180px", height: "30px"}} id='search' />
+    <h3 style={{textAlign: "center", color: "white", marginTop: "2vh", width: "180px", height: "30px"}}>{searchInput === "" ? "Wszystkie tablice" : "Tablice zawierające: "+searchInput}</h3>
+    <Button 
+    marginesTop={"2vh"}
+    margines={'0 auto'}
+    text={"Szukaj"} 
+    fun={() => {
+      var lowerCase = document.getElementById('search').value.toLowerCase();
+      setSearchInput(lowerCase);
+    }}
     color={"white"}/>
     </div>
     <BoardSet
@@ -203,6 +228,23 @@ const boardSetState = () => (
     changeBoard={setBoardId}
     changeState={setBoardState}
     format={format}
+    search={searchInput}
+    setSearch={setSearchInput}
+    />
+  </div>
+)
+const newBoardState = () => (
+  <div className="App" style={{display: 'flex', background: bgColor}}>
+    <div className="buttons" style={{margin: "50px"}}>
+    <Button 
+    marginesTop={"2vh"}
+    margines={'0 auto'}
+    text={"Strona główna"} 
+    fun={() => {setBoardState('board')}}
+    color={"white"}/>
+    </div>
+    <NewBoard
+    changeBoardState={setBoardState}
     />
   </div>
 )
@@ -244,13 +286,14 @@ const RenderStates = ({ val }) => {
       return addTaskState();
     case 'boardSet': 
       return boardSetState();
+    case 'newBoard': 
+      return newBoardState();
     case 'register': 
       return registerState();
     default: 
       return defaultState();
   }
 }
-
 
   return (
    <>
