@@ -95,8 +95,8 @@ function App() {
                   titleSize={titleSize}
                   isSample={false}
                   format={format}
-                  // notatki={['1','b']}
-                  notatki={Boards[boardId].notatki}
+                  notatki={['1','b']}
+                  //notatki={Boards[boardId].notatki}
                   on
                   funkcja={setShowNav}
               />
