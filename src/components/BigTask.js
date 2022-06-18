@@ -11,6 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./task.css"
 import { RiCloseFill } from "react-icons/ri";
 import TextEditor from "./TextEditor.js"
+import axios from 'axios';
 
 
 const users = [
@@ -56,6 +57,10 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
   const [usrNick, setUsrNick] = React.useState('');
   const [value, setValue] = React.useState('')
   const [newText, setNewText] = React.useState(tresc)
+  var id;
+  axios.get('http://localhost:8080/notes/search/findAllByTitle?title='+tytul).then(res => {
+      id = res.data["_embedded"]["notes"][0]["id"];
+  });
 
 
   function handleRemove(id) {
@@ -115,6 +120,17 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
     console.log(startDate);
     console.log(prior);
     console.log(tyt);
+
+    axios.patch('http://localhost:8080/notes/62ae171779203106f21b1f19', {
+      title: tyt,
+      contents: tr
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
 

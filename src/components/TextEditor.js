@@ -5,6 +5,7 @@ import JoditEditor from "jodit-react";
 const TextEditor =({setValue,tresc,fun})=>{
 
   const [content, setContent] = useState(tresc);
+  
   function f(e)
   {
     console.log(e);
