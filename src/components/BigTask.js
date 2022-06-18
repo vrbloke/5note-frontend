@@ -110,22 +110,10 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClos
     //     if (block === "\n") newText += block;
     //     else newText += block + "\n";
     //   }
-    var idx='aa';
 
-
-    setTresc(newText);
-    console.log(tr);
-    console.log(startDate);
-    console.log(prior);
-    console.log(id);
-
-    // axios.get('http://localhost:8080/notes/search/findAllByTitle?title='+tyt).then(res => {
-    //   const x = res.data["_embedded"]["notes"][0].id;
-    //   
-    // });
     axios.patch('http://localhost:8080/notes/'+id, {
         title: tyt,
-        contents: tr
+        contents: newText
       })
       .then(function (response) {
         console.log(response);
