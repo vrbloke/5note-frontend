@@ -17,7 +17,6 @@ const TextEditor =({setValue,tresc,fun})=>{
     ref={editor}
     value={content}
     tabIndex={1} 
-    //onBlur={(newContent) => setContent(newContent)}
     onChange={(newContent) => f(newContent)}
   />
 }

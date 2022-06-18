@@ -20,15 +20,9 @@ import LoginForm from './components/LoginForm';
 import axios from 'axios';
 
 function App() {
-  var abc;
-  axios.get('http://localhost:8080/notes').then(res => {
-    abc=res.data["_embedded"]["notes"];
-     console.log(abc[0]);
-      //setAc(abc);
-  });
 
   //PSEUDO BAZA DANYCH NOTATEK
-  const Boards = abc;
+  const Boards = [];
   
   const [bgColor, setBgColor] = useState('#3F3939');
   const [textColor, setTextColor] = useState('#000000');
