@@ -22,9 +22,13 @@ import LoginForm from './components/LoginForm';
 import axios from 'axios';
 
 function App() {
-  console.log("bbbb");
   var abc;
-  
+  axios.get('http://localhost:8080/notes').then(res => {
+    abc=res.data["_embedded"]["notes"];
+     console.log(abc[0]);
+      //setAc(abc);
+  });
+
   //PSEUDO BAZA DANYCH NOTATEK
   const Boards = abc;
   
@@ -38,25 +42,30 @@ function App() {
   const [showNav, setShowNav] = useState(true);
   const [searchInput, setSearchInput] = useState("");
 
-  const [boardState, setBoardState] = useState('start');
+  const [boardState, setBoardState] = useState('pies');
+  const [ac, setAc] = useState([]);
 
 
 
   const f = (id) =>
   {
     setNumTask(id);
-    console.log(id);
-    console.log('aaaaas');
+    // console.log(id);
+    // console.log('aaaaas');
   }
 
   function proba (){
-    axios.get('http://localhost:8080/boards').then(res => {
-      console.log(res.data["_embedded"]["boards"]);
-    });
+    // axios.get('http://localhost:8080/notes').then(res => {
+    //   console.log(res.data["_embedded"]["notes"][0]["title"]);
+    // });
+    // console.log(abc[0]["title"]);
+    // axios.get('http://localhost:8080/boards').then(res => {
+    // console.log(res.data["_embedded"]["boards"]);
   }
 
 
   const boardStateComponent = () => {
+    
     if(format==='lista')
       {
         return(
@@ -91,7 +100,7 @@ function App() {
                   isSample={false}
                   format={format}
                   notatki={['1','b']}
-                  //notatki={Boards[boardId].notatki}
+                 // notatki={abc[0]}
                   on
                   funkcja={setShowNav}
               />
@@ -265,7 +274,7 @@ const defaultState = () => (
 
 
 const RenderStates = ({ val }) => {
-  console.log("xd")
+  // console.log("xd")
   switch(val) {
     case 'board': 
       return boardStateComponent();

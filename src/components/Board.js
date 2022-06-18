@@ -1,28 +1,56 @@
 import React from "react";
 import Task from "./Task";
 import BigTask from "./BigTask";
+import axios from 'axios';
 
 const Board = (props, { funkcja }) => {
   const [showTasks, setShowTasks] = React.useState(true);
-  const [id, setId] = React.useState(0);
+  const [aa, seta] = React.useState([]);
+  const [tytul, setTytul] = React.useState("tytul");
+  const [tresc, setTresc] = React.useState("tresc");
+  const [data, setData] = React.useState("2022-05-01");
+  const [priorytet, setPriorytet] = React.useState(1);
+  const [tagi, setTagi] = React.useState(["abc"]);
+
+  //console.log(props.notatki);
+  axios.get('http://localhost:8080/notes').then(res => {
+     
+      seta(res.data["_embedded"]["notes"]);
+     // console.log(aa);
+  });
+
+  function findTask(tyt)
+  {
+    axios.get('http://localhost:8080/notes/search/findAllByTitle?title='+tyt).then(res => {
+     
+      setTytul(res.data["_embedded"]["notes"][0].title);
+      setTresc(res.data["_embedded"]["notes"][0].contents);
+      setData("2022-05-01");
+      setPriorytet(1);
+      setTagi(["abc"]);
+      seta(res.data["_embedded"]["notes"][0])
+      console.log(res.data["_embedded"]["notes"][0].title);
+      setShowTasks(false);
+    });
+  }
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
       {showTasks && (
         <div>
           <div>
-            {props.notatki.map((item) => (
+            { aa.map((item) => (
               <Task
-                key={item.id}
+               key={item.id}
                 onIcon={() => {
-                  setShowTasks(false);
-                  setId(Number(item.id));
+                  findTask(item.title);                
                 }}
-                tytul={item.tytul}
-                tresc={item.tresc}
+                tytul={item.title}
+                tresc={item.contents}
                 {...props}
               />
             ))}
+
           </div>
         </div>
       )}
@@ -31,11 +59,11 @@ const Board = (props, { funkcja }) => {
           <BigTask
             onClose={() => setShowTasks(true)}
             form={props.format}
-            tytul={props.notatki[id].tytul}
-            tresc={props.notatki[id].tresc}
-            data={props.notatki[id].data}
-            priorytet={props.notatki[id].priorytet}
-            tagi={props.notatki[id].tagi}
+            tytul={tytul}
+            tresc={tresc}
+            data={data}
+            priorytet={priorytet}
+            tagi={tagi}
             funkcja={() => funkcja}
           />
         </div>
