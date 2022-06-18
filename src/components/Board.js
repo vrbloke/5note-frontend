@@ -3,6 +3,7 @@ import Task from "./Task";
 import BigTask from "./BigTask";
 import axios from 'axios';
 
+
 const Board = (props, { funkcja }) => {
   const [showTasks, setShowTasks] = React.useState(true);
   const [aa, seta] = React.useState([]);
@@ -13,10 +14,11 @@ const Board = (props, { funkcja }) => {
   const [tagi, setTagi] = React.useState(["abc"]);
   const [id, setId] = React.useState("");
 
-  axios.get('http://localhost:8080/notes').then(res => {
+
+  // axios.get('http://localhost:8080/notes').then(res => {
      
-      seta(res.data["_embedded"]["notes"]);
-  });
+  //     seta(res.data["_embedded"]["notes"]);
+  // });
 
   function findTask(tyt)
   {
@@ -39,7 +41,7 @@ const Board = (props, { funkcja }) => {
       {showTasks && (
         <div>
           <div>
-            { aa.map((item) => (
+            { props.notatki.map((item) => (
               <Task
                key={item.id}
                 onIcon={() => {
