@@ -21,7 +21,16 @@ import RegistrationForm from './components/RegistrationForm';
 import LoginForm from './components/LoginForm';
 
 function App() {
+<<<<<<< HEAD
   console.log("bbbb");
+=======
+  var abc;
+  axios.get('http://localhost:8080/notes').then(res => {
+    abc=res.data["_embedded"]["notes"];
+     console.log(abc[0]);
+      //setAc(abc);
+  });
+>>>>>>> Kinga
 
   //PSEUDO BAZA DANYCH NOTATEK
   const Boards = BoardsJson
@@ -36,17 +45,34 @@ function App() {
   const [showNav, setShowNav] = useState(true);
   const [searchInput, setSearchInput] = useState("");
 
+<<<<<<< HEAD
   const [boardState, setBoardState] = useState('start');
+=======
+  const [boardState, setBoardState] = useState('pies');
+  const [ac, setAc] = useState([]);
+
+
+>>>>>>> Kinga
 
   const f = (id) =>
   {
     setNumTask(id);
-    console.log(id);
-    console.log('aaaaas');
+    // console.log(id);
+    // console.log('aaaaas');
   }
 
+<<<<<<< HEAD
   let searchInputHandler = (e) => {
 
+=======
+  function proba (){
+    // axios.get('http://localhost:8080/notes').then(res => {
+    //   console.log(res.data["_embedded"]["notes"][0]["title"]);
+    // });
+    // console.log(abc[0]["title"]);
+    // axios.get('http://localhost:8080/boards').then(res => {
+    // console.log(res.data["_embedded"]["boards"]);
+>>>>>>> Kinga
   }
 
   // return(
@@ -62,6 +88,7 @@ function App() {
   // );
 
   const boardStateComponent = () => {
+    
     if(format==='lista')
       {
         return(
@@ -96,7 +123,11 @@ function App() {
                   isSample={false}
                   format={format}
                   notatki={['1','b']}
+<<<<<<< HEAD
                   //notatki={Boards[boardId].notatki}
+=======
+                 // notatki={abc[0]}
+>>>>>>> Kinga
                   on
                   funkcja={setShowNav}
               />
@@ -270,7 +301,7 @@ const defaultState = () => (
 
 
 const RenderStates = ({ val }) => {
-  console.log("xd")
+  // console.log("xd")
   switch(val) {
     case 'board': 
       return boardStateComponent();

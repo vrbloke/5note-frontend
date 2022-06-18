@@ -11,6 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./task.css"
 import { RiCloseFill } from "react-icons/ri";
 import TextEditor from "./TextEditor.js"
+import axios from 'axios';
 
 
 const users = [
@@ -32,7 +33,7 @@ const users = [
 
 
 
-const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, numTask }) => {
+const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClose, numTask }) => {
 
   const content = ContentState.createFromText(tresc);
 
@@ -54,8 +55,8 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
   const [listUsrs, setListUsrs] = React.useState(users);
   const [usrId, setUsrId] = React.useState(-1);
   const [usrNick, setUsrNick] = React.useState('');
-  const [value, setValue] = React.useState('')
-  const [newText, setNewText] = React.useState(tresc)
+  const [value, setValue] = React.useState('');
+  const [newText, setNewText] = React.useState(tresc);
 
 
   function handleRemove(id) {
@@ -109,12 +110,31 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
     //     if (block === "\n") newText += block;
     //     else newText += block + "\n";
     //   }
+    var idx='aa';
+
 
     setTresc(newText);
     console.log(tr);
     console.log(startDate);
     console.log(prior);
-    console.log(tyt);
+    console.log(id);
+
+    // axios.get('http://localhost:8080/notes/search/findAllByTitle?title='+tyt).then(res => {
+    //   const x = res.data["_embedded"]["notes"][0].id;
+    //   
+    // });
+    axios.patch('http://localhost:8080/notes/'+id, {
+        title: tyt,
+        contents: tr
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
   }
 
 
