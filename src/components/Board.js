@@ -15,11 +15,6 @@ const Board = (props, { funkcja }) => {
   const [id, setId] = React.useState("");
 
 
-  // axios.get('http://localhost:8080/notes').then(res => {
-     
-  //     seta(res.data["_embedded"]["notes"]);
-  // });
-
   function findTask(tyt)
   {
     axios.get('http://localhost:8080/notes/search/findAllByTitle?title='+tyt).then(res => {

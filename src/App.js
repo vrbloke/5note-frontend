@@ -52,8 +52,6 @@ function App() {
   const f = (id) =>
   {
     setNumTask(id);
-    // console.log(id);
-    // console.log('aaaaas');
   }
 
   function proba (){
