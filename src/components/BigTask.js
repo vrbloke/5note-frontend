@@ -170,6 +170,8 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId
         console.log(error);
       });
 
+      setTresc(newText);
+
 
 
   }

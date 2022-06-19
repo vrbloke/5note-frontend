@@ -15,6 +15,7 @@ const Board = (props, { funkcja }) => {
   const [id, setId] = React.useState("");
   const [usersId, setUsersId] = React.useState([]);
   const [usersList, setUsersList] = React.useState([]);
+  const [not, setNot] = React.useState(props.notatki);
 
   function findTask(idx)
   {
@@ -38,12 +39,20 @@ const Board = (props, { funkcja }) => {
     });
   }
 
+  function changeNot()
+  {
+    axios.get('http://localhost:8080/notes').then(res => {
+      
+      setNot(res.data["_embedded"]["notes"]);
+      });
+  }
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
       {showTasks && (
         <div>
           <div>
-            { props.notatki.map((item) => (
+            { not.map((item) => (
               <Task
                key={item.id}
                 onIcon={() => {
@@ -61,7 +70,7 @@ const Board = (props, { funkcja }) => {
       {!showTasks && (
         <div style={{ height: "100%" }}>
           <BigTask
-            onClose={() => setShowTasks(true)}
+            onClose={() => {setShowTasks(true);changeNot()}}
             form={props.format}
             tytul={tytul}
             tresc={tresc}

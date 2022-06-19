@@ -70,13 +70,15 @@ function App() {
     });
   }
 
-  function setGet(stan)
+  async function setGet(stan)
   {
-      axios.get('http://localhost:8080/notes').then(res => {
+    console.log("stan");
+      const r= await axios.get('http://localhost:8080/notes').then(res => {
       
       seta(res.data["_embedded"]["notes"]);
-    });
-    setBoardState(stan);
+      });
+    const r2 = await setBoardState(stan);
+    
   }
 
   const f = (id) =>
