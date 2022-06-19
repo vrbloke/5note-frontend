@@ -13,9 +13,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./task.css";
 import { RiCloseFill } from "react-icons/ri";
 import TextEditor from "./TextEditor.js";
+import axios from 'axios';
 
 const AddTask = ({
-  form,
   tytul,
   tresc,
   data,
@@ -40,7 +40,7 @@ const AddTask = ({
   const [tr, setTresc] = React.useState(tresc);
   const [value, setValue] = React.useState("");
 
-  function handleOnClick() {
+  async function handleOnClick() {
     // var text = editorState.getCurrentContent().getBlocksAsArray();
     // console.log(text);
     const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
@@ -62,10 +62,15 @@ const AddTask = ({
       }
 
       setTresc(newText);
-      console.log(tr);
-      console.log(startDate);
-      console.log(prior);
-      console.log(tyt);
+      await axios.post("http://localhost:8080/notes", {
+        "title": tyt,
+        "contents": tr,
+        "userIds": ["sd123gssli12j", "1209sdjklsdngr4p"],
+        "groupIds": ["2131asdafspiqfwikwp"],
+        "priority": prior,
+        "date": startDate
+        });
+      await funkcja('board');
     }
   }
 
@@ -148,12 +153,7 @@ const AddTask = ({
         />
         <Button
           //fun={() => {setShowEditor(false)}}
-          fun={() => {
-            {
-              handleOnClick();
-              funkcja("board");
-            }
-          }}
+          fun={handleOnClick}
           width_p={"15%"}
           marginesTop={"15px"}
           margines={"auto"}
