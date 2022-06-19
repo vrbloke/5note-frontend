@@ -1,5 +1,5 @@
 import React from 'react'
-import MiniTask from "./MiniTask";
+
 
 
 const MiniBoardList = (props) => {

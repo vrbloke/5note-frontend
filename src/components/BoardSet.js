@@ -3,6 +3,16 @@ import MiniBoard from "./MiniBoard";
 import MiniBoardList from "./MiniBoardList";
 
 const BoardSet = (props) => {
+  
+  const items = props.boards.filter((item)=>{
+    if(props.search === ""){ 
+      return item;
+    }
+    else{
+      return item.nazwa.toLowerCase().includes(props.search);
+    }
+  })
+  
   return (
     <div
       style={{
@@ -18,7 +28,7 @@ const BoardSet = (props) => {
       }}
     >
       {props.format === "tablica" &&
-        props.boards.map((item) => (
+        items.map((item) => (
           <MiniBoard
             fun={() => {
               props.changeBoard(item.id);
@@ -26,9 +36,10 @@ const BoardSet = (props) => {
             }}
             {...item}
           />
-        ))}
+        ))
+      }
       {props.format === "lista" &&
-        props.boards.map((item) => (
+        items.map((item) => (
           <MiniBoardList
             fun={() => {
               props.changeBoard(item.id);

@@ -1,17 +1,10 @@
-import React, { useState, useEffect, MouseEvent } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
-import { Editor } from "react-draft-wysiwyg";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { FaUserPlus, FaUsers } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
-import { MdAdd } from "react-icons/md";
-import { BiDotsVerticalRounded } from "react-icons/bi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./task.css";
-import { RiCloseFill } from "react-icons/ri";
 import TextEditor from "./TextEditor.js";
 
 const AddTask = ({
@@ -149,10 +142,9 @@ const AddTask = ({
         <Button
           //fun={() => {setShowEditor(false)}}
           fun={() => {
-            {
+            
               handleOnClick();
               funkcja("board");
-            }
           }}
           width_p={"15%"}
           marginesTop={"15px"}

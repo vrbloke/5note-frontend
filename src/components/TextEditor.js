@@ -9,7 +9,7 @@ const TextEditor =({setValue,tresc,fun})=>{
   function f(e)
   {
     console.log(e);
-    {fun(e)};
+    fun(e);
   }
 
   const editor =useRef(null);

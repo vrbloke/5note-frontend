@@ -72,7 +72,7 @@ const Nav2 = (props) => {
             fontSize: "20px",
             width: "200px",
             padding: "3px",
-            marginTop: "33px",
+            marginTop: "26px",
           }}
         >
           <option selected value="">
