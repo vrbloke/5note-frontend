@@ -57,6 +57,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClos
   const [usrNick, setUsrNick] = React.useState('');
   const [value, setValue] = React.useState('');
   const [newText, setNewText] = React.useState(tresc);
+  const [tag, setTag] = React.useState(tagi);
 
 
   function handleRemove(id) {
@@ -113,7 +114,12 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClos
 
     axios.patch('http://localhost:8080/notes/'+id, {
         title: tyt,
-        contents: newText
+        contents: newText,
+        date: startDate,
+        priority: prior,
+        tags: ((tag+" ").replace(/\s/g, '')).split(",")
+
+
       })
       .then(function (response) {
         console.log(response);
@@ -211,7 +217,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClos
           <div style={{ backgroundColor: 'white', padding: '2px', width: '90%', margin: 'auto' }}>
             <TextEditor setValue={setValue} tresc={tr} fun={setNewText} />
           </div>
-          <input style={{ borderRadius: '6px', fontSize: '20px', width: '90%', marginTop: '10px' }} defaultValue={tagi} />
+          <input style={{ borderRadius: '6px', fontSize: '20px', width: '90%', marginTop: '10px' }} defaultValue={tagi} onChange={e => setTag(e.target.value)}/>
           <Button
             //fun={() => {setShowEditor(false)}}
             fun={() => { { handleOnClick(); funkcja(true); setShowEditor(false) } }}

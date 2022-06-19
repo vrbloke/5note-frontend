@@ -25,7 +25,6 @@ const Task = (props) => {
     <Draggable>
       <button style={ChipStyles.current}>
       <h2 style={{color: props.textColor, fontSize: props.titleSize+"px"}}>{props.tytul}</h2>
-        {/* <p style={{color: props.textColor, fontSize: props.textSize+"px"}}>{props.tresc}</p> */}
         <div dangerouslySetInnerHTML={{__html: props.tresc}} />
         {<BsArrowsMove onClick={props.onIcon} style={{position: 'fixed' ,bottom: '5', right: '5',fontSize:'2.5vh'}}/>}
       </button>

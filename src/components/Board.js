@@ -21,11 +21,11 @@ const Board = (props, { funkcja }) => {
      
       setTytul(res.data["_embedded"]["notes"][0].title);
       setTresc(res.data["_embedded"]["notes"][0].contents);
-      setData("2022-05-01");
-      setPriorytet(1);
-      setTagi(["abc"]);
+      setData(res.data["_embedded"]["notes"][0].date);
+      setPriorytet(res.data["_embedded"]["notes"][0].priority);
+      setTagi(res.data["_embedded"]["notes"][0].tags);
       seta(res.data["_embedded"]["notes"][0])
-      console.log(res.data["_embedded"]["notes"][0].title);
+      console.log(res.data["_embedded"]["notes"][0].date);
       setShowTasks(false);
       setId(res.data["_embedded"]["notes"][0].id);
     });
