@@ -226,13 +226,16 @@ const addTaskState = () => (
   fun={() => {setGet('board')}}
   color={"white"}/>
   </div>
-  <AddTask
+  <AddTask   
     form={format}
-    tytul={Boards[boardId].notatki[numTask].tytul}
-    tresc={Boards[boardId].notatki[numTask].tresc}
-    data={Boards[boardId].notatki[numTask].data}
-    priorytet={Boards[boardId].notatki[numTask].priorytet}
-    tagi={Boards[boardId].notatki[numTask].tagi}
+    tytul={tytul}
+    tresc={tresc}
+    data={data}
+    priorytet={priorytet}
+    tagi={tagi}
+    id={id}
+    usersId={usersId}
+    usersList={usersList}
     funkcja={setGet}/>
 </div>
 )
