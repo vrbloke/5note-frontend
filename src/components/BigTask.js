@@ -33,7 +33,7 @@ const users = [
 
 
 
-const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClose, numTask }) => {
+const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,users, onClose, numTask }) => {
 
   const content = ContentState.createFromText(tresc);
 
@@ -90,6 +90,21 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClos
 
   function handleChange(event) {
     setUsrNick(event.target.value);
+  }
+
+  function addUsr()
+  {
+    console.log("add");
+    axios.patch('http://localhost:8080/notes/'+id, {
+      userIds: [...users, usrId ]
+      //userIds: []
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   function handleOnClick() {
@@ -189,7 +204,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClos
             <div style={{ border: '1px solid black', borderRadius: '12px', width: '300px', margin: '10px', display: 'flex' }}>
               <CgProfile style={{ fontSize: '4vh', margin: 'auto', marginLeft: '10px' }} />
               <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{nick}</p>
-              <MdAdd style={{ fontSize: '4vh', margin: 'auto', marginRight: '10px', color: 'black' }} />
+              <MdAdd style={{ fontSize: '4vh', margin: 'auto', marginRight: '10px', color: 'black' }} onClick={()=>addUsr()} />
             </div>
           }
         </div>}

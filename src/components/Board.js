@@ -13,6 +13,7 @@ const Board = (props, { funkcja }) => {
   const [priorytet, setPriorytet] = React.useState(1);
   const [tagi, setTagi] = React.useState(["abc"]);
   const [id, setId] = React.useState("");
+  const [users, setUsers] = React.useState([]);
 
 
   function findTask(tyt)
@@ -28,6 +29,7 @@ const Board = (props, { funkcja }) => {
       console.log(res.data["_embedded"]["notes"][0].date);
       setShowTasks(false);
       setId(res.data["_embedded"]["notes"][0].id);
+      setUsers(res.data["_embedded"]["notes"][0].userIds);
     });
   }
 
@@ -63,6 +65,7 @@ const Board = (props, { funkcja }) => {
             tagi={tagi}
             id={id}
             funkcja={() => funkcja}
+            users={users}
           />
         </div>
       )}
