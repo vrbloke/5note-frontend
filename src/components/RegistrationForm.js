@@ -38,7 +38,8 @@ setSubmitted(false);
 const handleSubmit = (e) => {
     e.preventDefault();
     axios.get('http://localhost:8080/users/search/findByUsername?username='+login).then(res => {
-        setUsersList(res.data);
+        setUsersList(usersList);
+        //console.log(res.data);
     });
     console.log(usersList);
     axios.get('http://localhost:8080/users').then(res => {
