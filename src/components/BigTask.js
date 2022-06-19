@@ -33,7 +33,7 @@ const users = [
 
 
 
-const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,users, onClose, numTask }) => {
+const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId, usersList,onClose, numTask }) => {
 
   const content = ContentState.createFromText(tresc);
 
@@ -52,7 +52,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,users, 
   const [prior, setPriorytet] = React.useState(priorytet)
   const [tyt, setTytul] = React.useState(tytul)
   const [tr, setTresc] = React.useState(tresc)
-  const [listUsrs, setListUsrs] = React.useState(users);
+  const [listUsrs, setListUsrs] = React.useState(usersList);
   const [usrId, setUsrId] = React.useState('');
   const [usrNick, setUsrNick] = React.useState('');
   const [value, setValue] = React.useState('');
@@ -61,10 +61,22 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,users, 
   const [nick, setNick] = React.useState("");
 
 
-  function handleRemove(id) {
-    const newList = listUsrs.filter((item) => item.id !== id);
+  function handleRemove(idx) {
+    console.log("del");
+    axios.patch('http://localhost:8080/notes/'+id, {
+      userIds: listUsrs.filter((item) => item.id !== idx)
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+    });
 
-    setListUsrs(newList);
+    axios.get('http://localhost:8080/users').then(res => {
+      setListUsrs(res.data["_embedded"]["users"]);
+     console.log(usersList);
+    });
   }
 
   function uploadImageCallBack(file) {
@@ -94,10 +106,8 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,users, 
 
   function addUsr()
   {
-    console.log("add");
     axios.patch('http://localhost:8080/notes/'+id, {
-      userIds: [...users, usrId ]
-      //userIds: []
+      userIds: [...usersId, usrId ]
       })
       .then(function (response) {
         console.log(response);
@@ -190,7 +200,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,users, 
             {listUsrs.map((item) => (
               <div key={item.id} style={{ border: '1px solid black', borderRadius: '12px', width: '300px', margin: '10px', display: 'flex' }}>
                 <CgProfile style={{ borderRadius: '12px', fontSize: '4vh', margin: 'auto', marginLeft: '10px' }} />
-                <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{item.nick}</p>
+                <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{item.username}</p>
                 <RiCloseFill style={{ color: 'black', margin: 'auto', marginRight: '10px', fontSize: '30px' }} onClick={() => handleRemove(item.id)} />
               </div>
             ))}
