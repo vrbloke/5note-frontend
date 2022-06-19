@@ -13,7 +13,8 @@ const Board = (props, { funkcja }) => {
   const [priorytet, setPriorytet] = React.useState(1);
   const [tagi, setTagi] = React.useState(["abc"]);
   const [id, setId] = React.useState("");
-
+  const [usersId, setUsersId] = React.useState([]);
+  const [usersList, setUsersList] = React.useState([]);
 
   function findTask(tyt)
   {
@@ -21,13 +22,19 @@ const Board = (props, { funkcja }) => {
      
       setTytul(res.data["_embedded"]["notes"][0].title);
       setTresc(res.data["_embedded"]["notes"][0].contents);
-      setData("2022-05-01");
-      setPriorytet(1);
-      setTagi(["abc"]);
+      setData(res.data["_embedded"]["notes"][0].date);
+      setPriorytet(res.data["_embedded"]["notes"][0].priority);
+      setTagi(res.data["_embedded"]["notes"][0].tags);
       seta(res.data["_embedded"]["notes"][0])
-      console.log(res.data["_embedded"]["notes"][0].title);
+      console.log(res.data["_embedded"]["notes"][0].date);
       setShowTasks(false);
       setId(res.data["_embedded"]["notes"][0].id);
+      setUsersId(res.data["_embedded"]["notes"][0].userIds);
+    });
+
+    axios.get('http://localhost:8080/users').then(res => {
+     setUsersList(res.data["_embedded"]["users"]);
+     console.log(usersList);
     });
   }
 
@@ -63,6 +70,8 @@ const Board = (props, { funkcja }) => {
             tagi={tagi}
             id={id}
             funkcja={() => funkcja}
+            usersId={usersId}
+            usersList={usersList}
           />
         </div>
       )}
