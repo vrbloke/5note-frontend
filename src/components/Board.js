@@ -3,6 +3,7 @@ import Task from "./Task";
 import BigTask from "./BigTask";
 import axios from 'axios';
 
+
 const Board = (props, { funkcja }) => {
   const [showTasks, setShowTasks] = React.useState(true);
   const [aa, seta] = React.useState([]);
@@ -11,13 +12,8 @@ const Board = (props, { funkcja }) => {
   const [data, setData] = React.useState("2022-05-01");
   const [priorytet, setPriorytet] = React.useState(1);
   const [tagi, setTagi] = React.useState(["abc"]);
+  const [id, setId] = React.useState("");
 
-  //console.log(props.notatki);
-  axios.get('http://localhost:8080/notes').then(res => {
-     
-      seta(res.data["_embedded"]["notes"]);
-     // console.log(aa);
-  });
 
   function findTask(tyt)
   {
@@ -31,6 +27,7 @@ const Board = (props, { funkcja }) => {
       seta(res.data["_embedded"]["notes"][0])
       console.log(res.data["_embedded"]["notes"][0].title);
       setShowTasks(false);
+      setId(res.data["_embedded"]["notes"][0].id);
     });
   }
 
@@ -39,7 +36,7 @@ const Board = (props, { funkcja }) => {
       {showTasks && (
         <div>
           <div>
-            { aa.map((item) => (
+            { props.notatki.map((item) => (
               <Task
                key={item.id}
                 onIcon={() => {
@@ -64,6 +61,7 @@ const Board = (props, { funkcja }) => {
             data={data}
             priorytet={priorytet}
             tagi={tagi}
+            id={id}
             funkcja={() => funkcja}
           />
         </div>

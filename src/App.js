@@ -22,6 +22,7 @@ import LoginForm from './components/LoginForm';
 
 function App() {
 <<<<<<< HEAD
+<<<<<<< HEAD
   console.log("bbbb");
 =======
   var abc;
@@ -34,6 +35,11 @@ function App() {
 
   //PSEUDO BAZA DANYCH NOTATEK
   const Boards = BoardsJson
+=======
+
+  //PSEUDO BAZA DANYCH NOTATEK
+  const Boards = [];
+>>>>>>> Kinga
   
   const [bgColor, setBgColor] = useState('#3F3939');
   const [textColor, setTextColor] = useState('#000000');
@@ -43,7 +49,11 @@ function App() {
   const [numTask, setNumTask] = useState(1);
   const [boardId, setBoardId] = useState(0);
   const [showNav, setShowNav] = useState(true);
+<<<<<<< HEAD
   const [searchInput, setSearchInput] = useState("");
+=======
+  
+>>>>>>> Kinga
 
 <<<<<<< HEAD
   const [boardState, setBoardState] = useState('start');
@@ -51,14 +61,25 @@ function App() {
   const [boardState, setBoardState] = useState('pies');
   const [ac, setAc] = useState([]);
 
+  const [aa, seta] = React.useState([]);
+  
 
+<<<<<<< HEAD
+>>>>>>> Kinga
+=======
+  function setGet(stan)
+  {
+      axios.get('http://localhost:8080/notes').then(res => {
+      
+      seta(res.data["_embedded"]["notes"]);
+    });
+    setBoardState(stan);
+  }
 >>>>>>> Kinga
 
   const f = (id) =>
   {
     setNumTask(id);
-    // console.log(id);
-    // console.log('aaaaas');
   }
 
 <<<<<<< HEAD
@@ -93,7 +114,7 @@ function App() {
       {
         return(
           <div className="App" style={{display:'flex', background: bgColor}}>
-            {showNav && <Nav2 changeBoardState={setBoardState}
+            {showNav && <Nav2 changeBoardState={setGet}
             notatki={Boards[boardId].notatki}
             fun={(id)=>f(id)}/>}
            
@@ -107,7 +128,7 @@ function App() {
             funkcja={setShowNav}
             numTask={numTask}
           />
-          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',color:'white',marginTop:'40px'}} onClick={() => {setBoardState('settings')}}/>
+          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',color:'white',marginTop:'40px'}} onClick={() => {setGet('settings')}}/>
           </div>
   
         );
@@ -115,23 +136,29 @@ function App() {
       else{
         return (
           <div className="App" style={{background: bgColor}}>
-            <Nav changeBoardState={setBoardState}/>
+            <Nav changeBoardState={setGet}/>
             <Board 
                   textColor={textColor}
                   textSize={textSize}
                   titleSize={titleSize}
                   isSample={false}
                   format={format}
+<<<<<<< HEAD
                   notatki={['1','b']}
 <<<<<<< HEAD
                   //notatki={Boards[boardId].notatki}
 =======
                  // notatki={abc[0]}
 >>>>>>> Kinga
+=======
+                  //notatki={['1','b']}
+                 // notatki={abc[0]}
+                  notatki={aa}
+>>>>>>> Kinga
                   on
                   funkcja={setShowNav}
               />
-            <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setBoardState('settings')}}/>
+            <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setGet('settings')}}/>
           </div>
         );
       }
@@ -143,7 +170,7 @@ function App() {
       <Button 
       margines={'0 auto'}
       text={"Strona główna"} 
-      fun={() => {setBoardState('board')}}
+      fun={() => {setGet('board')}}
       color={"white"}/>
       <Task 
       onIcon={() => {}} 
@@ -161,7 +188,11 @@ function App() {
       titleSize={titleSize} changeTitleSize={setTitleSize}
       isSample={true}
       format={format} changeFormat={setFormat}/>
+<<<<<<< HEAD
       <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh', color:"white", marginTop:'56px'}} onClick={() => {setBoardState('board')}}/>
+=======
+      <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh', color:"white", marginTop:'56px'}} onClick={() => {setGet('board'); proba()}}/>
+>>>>>>> Kinga
     </div>
   );
 
@@ -171,7 +202,7 @@ function App() {
       <Button 
       margines={'0 auto'}
       text={"Strona główna"} 
-      fun={() => {setBoardState('board')}}
+      fun={() => {setGet('board')}}
       color={"white"}/>
       </div>
       <Groups/>
@@ -184,10 +215,10 @@ function App() {
       <Button 
       margines={'0 auto'}
       text={"Strona główna"} 
-      fun={() => {setBoardState('board')}}
+      fun={() => {setGet('board')}}
       color={"white"}/>
       </div>
-      <Account changeBoardState={setBoardState}/>
+      <Account changeBoardState={setGet}/>
     </div>
   )
 
@@ -205,7 +236,7 @@ function App() {
   fun={() => {setBoardState('account')}}
   color={"white"}/>
   </div>
-  <PasswordChange changeBoardState={setBoardState}/>
+  <PasswordChange changeBoardState={setGet}/>
 </div>)
 
 const addTaskState = () => (
@@ -214,7 +245,7 @@ const addTaskState = () => (
   <Button 
   margines={'0 auto'}
   text={"Strona główna"} 
-  fun={() => {setBoardState('board')}}
+  fun={() => {setGet('board')}}
   color={"white"}/>
   </div>
   <AddTask
@@ -224,7 +255,7 @@ const addTaskState = () => (
     data={Boards[boardId].notatki[numTask].data}
     priorytet={Boards[boardId].notatki[numTask].priorytet}
     tagi={Boards[boardId].notatki[numTask].tagi}
-    funkcja={setBoardState}/>
+    funkcja={setGet}/>
 </div>
 )
 const boardSetState = () => (
@@ -234,7 +265,7 @@ const boardSetState = () => (
     marginesTop={"2vh"}
     margines={'0 auto'}
     text={"Strona główna"} 
-    fun={() => {setBoardState('board')}}
+    fun={() => {setGet('board')}}
     color={"white"}/>
     <Button 
     marginesTop={"2vh"}
@@ -257,7 +288,7 @@ const boardSetState = () => (
     <BoardSet
     boards={Boards}
     changeBoard={setBoardId}
-    changeState={setBoardState}
+    changeState={setGet}
     format={format}
     search={searchInput}
     setSearch={setSearchInput}
@@ -285,7 +316,7 @@ const registerState = () => (
    <Button 
    margines={'0 auto'}
    text={"Wróć do logowania"} 
-   fun={() => {setBoardState('login')}}
+   fun={() => {setGet('login')}}
    color={"white"}/>
    </div>
 
@@ -295,7 +326,7 @@ const registerState = () => (
 
 const defaultState = () => (
   <div className="App" style={{display:'flex', background: bgColor}}>
-  <LoginForm changeBoardState={setBoardState}/>
+  <LoginForm changeBoardState={setGet}/>
   </div>
 )
 
