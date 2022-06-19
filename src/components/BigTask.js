@@ -179,10 +179,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClos
             </div>
           }
         </div>}
-
-        <div style={{ padding: '5vh', textAlign: 'justify', fontSize: '20px', overflowY: 'scroll', maxHeight: '600px', width: '100%' }}>
-          {tr}
-        </div>
+        <div style={{ padding: '5vh', overflowY: 'scroll', maxHeight: '600px', width: '100%' }} dangerouslySetInnerHTML={{__html: tr}} />
       </div>}
 
       {
