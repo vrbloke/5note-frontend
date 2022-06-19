@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Button from './Button'
 import { EditorState, ContentState, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { FaUserPlus, FaUsers } from "react-icons/fa"
+import { FaUserPlus, FaUsers, FaXRay } from "react-icons/fa"
 import { IoClose } from "react-icons/io5"
 import { CgProfile } from "react-icons/cg"
 import { MdAdd } from "react-icons/md"
@@ -62,11 +62,10 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId
   const [uIds, setUIds] = React.useState(usersId);
 
 
-  function handleRemove(idx) {
+  async function handleRemove(idx) {
     console.log("del");
-    setListUsrs(listUsrs.filter((item) => item.id !== idx));
-   // changeId(idx);
-    axios.patch('http://localhost:8080/notes/'+id, {
+    const r = await setListUsrs(listUsrs.filter((item) => item.id !== idx));
+    const r1 = await axios.patch('http://localhost:8080/notes/'+id, {
       userIds: uIds.filter((item) => item !== idx)
       })
       .then(function (response) {
@@ -75,6 +74,9 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId
       })
       .catch(function (error) {
         console.log(error);
+    });
+    const r2 = axios.get('http://localhost:8080/notes/'+id).then(res => {
+      setUIds(res.data.userIds);
     });
   }
 
@@ -103,22 +105,32 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId
     setUsrNick(event.target.value);
   }
 
-  function addUsr()
+  function xx()
   {
     axios.patch('http://localhost:8080/notes/'+id, {
-      userIds: [...usersId, usrId ]
+      userIds: [...uIds, usrId ]
       })
       .then(function (response) {
         console.log(response);
+        console.log("aaaa");
       })
       .catch(function (error) {
         console.log(error);
       });
 
-      axios.get('http://localhost:8080/users/search/findAllByNoteAccess?id='+id).then(res => {
+  }
+
+  async function addUsr()
+  {
+      
+      const res = await xx();
+      const r1= await setUIds([...uIds, usrId]);
+      const r2 = await setUsrId('');
+      
+      const r = await axios.get('http://localhost:8080/users/search/findAllByNoteAccess?id='+id).then(res => {
         setListUsrs(res.data);
-        console.log(res.data);
-       });
+      });
+      console.log(listUsrs);
   }
 
   function handleOnClick() {
@@ -177,8 +189,6 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId
 
     }
   }
-
-
 
 
   return (
