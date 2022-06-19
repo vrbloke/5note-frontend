@@ -204,7 +204,7 @@ const Nav2 = (props) => {
       <div>
         <div style={{ marginTop: "30px" }}>
           <DraggableList width={340} height={50} rowSize={1}>
-            {props.notatki.map((item) => (
+          {props.notatki && props.notatki.map((item) => (
               <div
                 key={item.id}
                 style={{
@@ -218,7 +218,7 @@ const Nav2 = (props) => {
                 }}
                 onDoubleClick={() => props.fun(item.id)}
               >
-                {item.tytul}
+                {item.title}
               </div>
             ))}
           </DraggableList>

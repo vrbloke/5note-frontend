@@ -34,7 +34,7 @@ const Board = (props, { funkcja }) => {
 
     axios.get('http://localhost:8080/users/search/findAllByNoteAccess?id='+idx).then(res => {
      setUsersList(res.data);
-     console.log(res.data);
+     //console.log(res.data);
     });
   }
 
