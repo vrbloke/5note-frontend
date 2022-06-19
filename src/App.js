@@ -38,7 +38,35 @@ function App() {
   const [ac, setAc] = useState([]);
 
   const [aa, seta] = React.useState([]);
-  
+
+  const [tytul, setTytul] = React.useState("tytul");
+  const [tresc, setTresc] = React.useState("tresc");
+  const [data, setData] = React.useState("2022-05-01");
+  const [priorytet, setPriorytet] = React.useState(1);
+  const [tagi, setTagi] = React.useState(["abc"]);
+  const [id, setId] = React.useState("");
+  const [usersId, setUsersId] = React.useState([]);
+  const [usersList, setUsersList] = React.useState([]);
+
+  function findTask(tyt)
+  {
+    axios.get('http://localhost:8080/notes/search/findAllByTitle?title='+tyt).then(res => {
+     
+      setTytul(res.data["_embedded"]["notes"][0].title);
+      setTresc(res.data["_embedded"]["notes"][0].contents);
+      setData(res.data["_embedded"]["notes"][0].date);
+      setPriorytet(res.data["_embedded"]["notes"][0].priority);
+      setTagi(res.data["_embedded"]["notes"][0].tags);
+      console.log(res.data["_embedded"]["notes"][0].date);
+      setId(res.data["_embedded"]["notes"][0].id);
+      setUsersId(res.data["_embedded"]["notes"][0].userIds);
+    });
+
+    axios.get('http://localhost:8080/users').then(res => {
+     setUsersList(res.data["_embedded"]["users"]);
+     console.log(usersList);
+    });
+  }
 
   function setGet(stan)
   {
@@ -71,18 +99,21 @@ function App() {
         return(
           <div className="App" style={{display:'flex', background: bgColor}}>
             {showNav && <Nav2 changeBoardState={setGet}
-            notatki={Boards[boardId].notatki}
-            fun={(id)=>f(id)}/>}
+            notatki={aa}
+            fun={(title) => {
+              findTask(title);                
+            }}/>}
            
           <BigTask
-            form={format}
-            tytul={Boards[boardId].notatki[numTask].tytul}
-            tresc={Boards[boardId].notatki[numTask].tresc}
-            data={Boards[boardId].notatki[numTask].data}
-            priorytet={Boards[boardId].notatki[numTask].priorytet}
-            tagi={Boards[boardId].notatki[numTask].tagi}
-            funkcja={setShowNav}
-            numTask={numTask}
+            tytul={tytul}
+            tresc={tresc}
+            data={data}
+            priorytet={priorytet}
+            tagi={tagi}
+            id={id}
+            funkcja={()=>{}}
+            usersId={usersId}
+            usersList={usersList}
           />
           <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',color:'white',marginTop:'40px'}} onClick={() => {setGet('settings')}}/>
           </div>
@@ -193,11 +224,11 @@ const addTaskState = () => (
   </div>
   <AddTask
     form={format}
-    tytul={Boards[boardId].notatki[numTask].tytul}
-    tresc={Boards[boardId].notatki[numTask].tresc}
-    data={Boards[boardId].notatki[numTask].data}
-    priorytet={Boards[boardId].notatki[numTask].priorytet}
-    tagi={Boards[boardId].notatki[numTask].tagi}
+    tytul={aa[numTask].tytul}
+    tresc={aa[numTask].tresc}
+    data={aa[numTask].data}
+    priorytet={aa[numTask].priorytet}
+    tagi={aa[numTask].tagi}
     funkcja={setGet}/>
 </div>
 )
