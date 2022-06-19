@@ -1,28 +1,60 @@
 import React from "react";
 import Task from "./Task";
 import BigTask from "./BigTask";
+import axios from 'axios';
+
 
 const Board = (props, { funkcja }) => {
   const [showTasks, setShowTasks] = React.useState(true);
-  const [id, setId] = React.useState(0);
+  const [aa, seta] = React.useState([]);
+  const [tytul, setTytul] = React.useState("tytul");
+  const [tresc, setTresc] = React.useState("tresc");
+  const [data, setData] = React.useState("2022-05-01");
+  const [priorytet, setPriorytet] = React.useState(1);
+  const [tagi, setTagi] = React.useState(["abc"]);
+  const [id, setId] = React.useState("");
+  const [usersId, setUsersId] = React.useState([]);
+  const [usersList, setUsersList] = React.useState([]);
+
+  function findTask(idx)
+  {
+    axios.get('http://localhost:8080/notes/'+idx).then(res => {
+     
+      setTytul(res.data.title);
+      setTresc(res.data.contents);
+      setData(res.data.date);
+      setPriorytet(res.data.priority);
+      setTagi(res.data.tags);
+      seta(res.data)
+      setId(res.data.id);
+      setUsersId(res.data.userIds);
+      console.log(res.data.id);
+      setShowTasks(false);
+    });
+
+    axios.get('http://localhost:8080/users/search/findAllByNoteAccess?id='+idx).then(res => {
+     setUsersList(res.data);
+     console.log(res.data);
+    });
+  }
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
       {showTasks && (
         <div>
           <div>
-            {props.notatki.map((item) => (
+            { props.notatki.map((item) => (
               <Task
-                key={item.id}
+               key={item.id}
                 onIcon={() => {
-                  setShowTasks(false);
-                  setId(Number(item.id));
+                  findTask(item.id);                
                 }}
-                tytul={item.tytul}
-                tresc={item.tresc}
+                tytul={item.title}
+                tresc={item.contents}
                 {...props}
               />
             ))}
+
           </div>
         </div>
       )}
@@ -31,12 +63,15 @@ const Board = (props, { funkcja }) => {
           <BigTask
             onClose={() => setShowTasks(true)}
             form={props.format}
-            tytul={props.notatki[id].tytul}
-            tresc={props.notatki[id].tresc}
-            data={props.notatki[id].data}
-            priorytet={props.notatki[id].priorytet}
-            tagi={props.notatki[id].tagi}
+            tytul={tytul}
+            tresc={tresc}
+            data={data}
+            priorytet={priorytet}
+            tagi={tagi}
+            id={id}
             funkcja={() => funkcja}
+            usersId={usersId}
+            usersList={usersList}
           />
         </div>
       )}

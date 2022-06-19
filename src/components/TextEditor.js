@@ -5,6 +5,7 @@ import JoditEditor from "jodit-react";
 const TextEditor =({setValue,tresc,fun})=>{
 
   const [content, setContent] = useState(tresc);
+  
   function f(e)
   {
     console.log(e);
@@ -16,7 +17,6 @@ const TextEditor =({setValue,tresc,fun})=>{
     ref={editor}
     value={content}
     tabIndex={1} 
-    //onBlur={(newContent) => setContent(newContent)}
     onChange={(newContent) => f(newContent)}
   />
 }

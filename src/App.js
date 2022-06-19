@@ -19,12 +19,12 @@ import NewBoard from './components/NewBoard';
 import BoardsJson from './Boards.json' 
 import RegistrationForm from './components/RegistrationForm';
 import LoginForm from './components/LoginForm';
+import axios from 'axios';
 
 function App() {
-  console.log("bbbb");
 
   //PSEUDO BAZA DANYCH NOTATEK
-  const Boards = BoardsJson
+  const Boards = [];
   
   const [bgColor, setBgColor] = useState('#3F3939');
   const [textColor, setTextColor] = useState('#000000');
@@ -34,39 +34,47 @@ function App() {
   const [numTask, setNumTask] = useState(1);
   const [boardId, setBoardId] = useState(0);
   const [showNav, setShowNav] = useState(true);
-  const [searchInput, setSearchInput] = useState("");
 
-  const [boardState, setBoardState] = useState('start');
+  
+
+  const [boardState, setBoardState] = useState('pies');
+  const [ac, setAc] = useState([]);
+
+  const [aa, seta] = React.useState([]);
+  
+
+  function setGet(stan)
+  {
+      axios.get('http://localhost:8080/notes').then(res => {
+      
+      seta(res.data["_embedded"]["notes"]);
+    });
+    setBoardState(stan);
+  }
 
   const f = (id) =>
   {
     setNumTask(id);
-    console.log(id);
-    console.log('aaaaas');
   }
 
-  let searchInputHandler = (e) => {
 
+  function proba (){
+    // axios.get('http://localhost:8080/notes').then(res => {
+    //   console.log(res.data["_embedded"]["notes"][0]["title"]);
+    // });
+    // console.log(abc[0]["title"]);
+    // axios.get('http://localhost:8080/boards').then(res => {
+    // console.log(res.data["_embedded"]["boards"]);
   }
 
-  // return(
-  //   switch(boardState)
-  // {
-  //   case 'board':
-  //     if(format==='lista')
-  //     {
-
-  //     }
-  // }
-
-  // );
 
   const boardStateComponent = () => {
+    
     if(format==='lista')
       {
         return(
           <div className="App" style={{display:'flex', background: bgColor}}>
-            {showNav && <Nav2 changeBoardState={setBoardState}
+            {showNav && <Nav2 changeBoardState={setGet}
             notatki={Boards[boardId].notatki}
             fun={(id)=>f(id)}/>}
            
@@ -80,7 +88,7 @@ function App() {
             funkcja={setShowNav}
             numTask={numTask}
           />
-          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',color:'white',marginTop:'40px'}} onClick={() => {setBoardState('settings')}}/>
+          <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',color:'white',marginTop:'40px'}} onClick={() => {setGet('settings')}}/>
           </div>
   
         );
@@ -88,19 +96,20 @@ function App() {
       else{
         return (
           <div className="App" style={{background: bgColor}}>
-            <Nav changeBoardState={setBoardState}/>
+            <Nav changeBoardState={setGet}/>
             <Board 
                   textColor={textColor}
                   textSize={textSize}
                   titleSize={titleSize}
                   isSample={false}
                   format={format}
-                  // notatki={['1','b']}
-                  notatki={Boards[boardId].notatki}
+                  //notatki={['1','b']}
+                 // notatki={abc[0]}
+                  notatki={aa}
                   on
                   funkcja={setShowNav}
               />
-            <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setBoardState('settings')}}/>
+            <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setGet('settings')}}/>
           </div>
         );
       }
@@ -112,7 +121,7 @@ function App() {
       <Button 
       margines={'0 auto'}
       text={"Strona główna"} 
-      fun={() => {setBoardState('board')}}
+      fun={() => {setGet('board')}}
       color={"white"}/>
       <Task 
       onIcon={() => {}} 
@@ -130,7 +139,7 @@ function App() {
       titleSize={titleSize} changeTitleSize={setTitleSize}
       isSample={true}
       format={format} changeFormat={setFormat}/>
-      <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh', color:"white", marginTop:'56px'}} onClick={() => {setBoardState('board')}}/>
+      <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh', color:"white", marginTop:'56px'}} onClick={() => {setGet('board'); proba()}}/>
     </div>
   );
 
@@ -140,7 +149,7 @@ function App() {
       <Button 
       margines={'0 auto'}
       text={"Strona główna"} 
-      fun={() => {setBoardState('board')}}
+      fun={() => {setGet('board')}}
       color={"white"}/>
       </div>
       <Groups/>
@@ -153,10 +162,10 @@ function App() {
       <Button 
       margines={'0 auto'}
       text={"Strona główna"} 
-      fun={() => {setBoardState('board')}}
+      fun={() => {setGet('board')}}
       color={"white"}/>
       </div>
-      <Account changeBoardState={setBoardState}/>
+      <Account changeBoardState={setGet}/>
     </div>
   )
 
@@ -174,7 +183,7 @@ function App() {
   fun={() => {setBoardState('account')}}
   color={"white"}/>
   </div>
-  <PasswordChange changeBoardState={setBoardState}/>
+  <PasswordChange changeBoardState={setGet}/>
 </div>)
 
 const addTaskState = () => (
@@ -183,7 +192,7 @@ const addTaskState = () => (
   <Button 
   margines={'0 auto'}
   text={"Strona główna"} 
-  fun={() => {setBoardState('board')}}
+  fun={() => {setGet('board')}}
   color={"white"}/>
   </div>
   <AddTask
@@ -193,7 +202,7 @@ const addTaskState = () => (
     data={Boards[boardId].notatki[numTask].data}
     priorytet={Boards[boardId].notatki[numTask].priorytet}
     tagi={Boards[boardId].notatki[numTask].tagi}
-    funkcja={setBoardState}/>
+    funkcja={setGet}/>
 </div>
 )
 const boardSetState = () => (
@@ -203,7 +212,7 @@ const boardSetState = () => (
     marginesTop={"2vh"}
     margines={'0 auto'}
     text={"Strona główna"} 
-    fun={() => {setBoardState('board')}}
+    fun={() => {setGet('board')}}
     color={"white"}/>
     <Button 
     marginesTop={"2vh"}
@@ -226,7 +235,7 @@ const boardSetState = () => (
     <BoardSet
     boards={Boards}
     changeBoard={setBoardId}
-    changeState={setBoardState}
+    changeState={setGet}
     format={format}
     search={searchInput}
     setSearch={setSearchInput}
@@ -254,7 +263,7 @@ const registerState = () => (
    <Button 
    margines={'0 auto'}
    text={"Wróć do logowania"} 
-   fun={() => {setBoardState('login')}}
+   fun={() => {setGet('login')}}
    color={"white"}/>
    </div>
 
@@ -264,13 +273,13 @@ const registerState = () => (
 
 const defaultState = () => (
   <div className="App" style={{display:'flex', background: bgColor}}>
-  <LoginForm changeBoardState={setBoardState}/>
+  <LoginForm changeBoardState={setGet}/>
   </div>
 )
 
 
 const RenderStates = ({ val }) => {
-  console.log("xd")
+  // console.log("xd")
   switch(val) {
     case 'board': 
       return boardStateComponent();
@@ -300,193 +309,6 @@ const RenderStates = ({ val }) => {
     <RenderStates val={boardState} />
    </>
   )
-
-
-
-
-
-
-
-// F
-//   switch(boardState)
-//   {
-//     case 'board':
-//       if(format==='lista')
-//       {
-//         return(
-//           <div className="App" style={{display:'flex', background: bgColor}}>
-//             {showNav && <Nav2 changeBoardState={setBoardState}
-//             notatki={Boards[boardId].notatki}
-//             fun={(id)=>f(id)}/>}
-           
-//           <BigTask
-//             form={format}
-//             tytul={Boards[boardId].notatki[numTask].tytul}
-//             tresc={Boards[boardId].notatki[numTask].tresc}
-//             data={Boards[boardId].notatki[numTask].data}
-//             priorytet={Boards[boardId].notatki[numTask].priorytet}
-//             tagi={Boards[boardId].notatki[numTask].tagi}
-//             funkcja={setShowNav}
-//             numTask={numTask}
-//           />
-//           <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh',color:'white',marginTop:'40px'}} onClick={() => {setBoardState('settings')}}/>
-//           </div>
-  
-//         );
-//       }
-//       else{
-//         return (
-//           <div className="App" style={{background: bgColor}}>
-//             <Nav changeBoardState={setBoardState}/>
-//             <Board 
-//                   textColor={textColor}
-//                   textSize={textSize}
-//                   titleSize={titleSize}
-//                   isSample={false}
-//                   format={format}
-//                   // notatki={['1','b']}
-//                   notatki={Boards[boardId].notatki}
-//                   on
-//                   funkcja={setShowNav}
-//               />
-//             <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setBoardState('settings')}}/>
-//           </div>
-//         );
-//       }
-//     case  'settings':
-//       return (
-//         <div className="App" style={{background: bgColor}}>
-//           <div className="buttons" style={{margin: "50px"}}>
-//           <Button 
-//           margines={'0 auto'}
-//           text={"Strona główna"} 
-//           fun={() => {setBoardState('board')}}
-//           color={"white"}/>
-//           <Task 
-//           onIcon={() => {}} 
-//           tytul={"Test"} 
-//           tresc={"test test"} 
-//           textColor={textColor}
-//           textSize={textSize}
-//           titleSize={titleSize}
-//           isSample={true}/>
-//           </div>
-//           <Settings 
-//           bgColor={bgColor} changeBgColor={setBgColor}
-//           textColor={textColor} changeTextColor={setTextColor}
-//           textSize={textSize} changeTextSize={setTextSize}
-//           titleSize={titleSize} changeTitleSize={setTitleSize}
-//           isSample={true}
-//           format={format} changeFormat={setFormat}/>
-//           <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh', color:"white", marginTop:'56px'}} onClick={() => {setBoardState('board')}}/>
-//         </div>
-//       );
-      
-//     case 'groups':
-//       return(
-//         <div className="App" style={{background: bgColor}}>
-//           <div className="buttons" style={{margin: "50px"}}>
-//           <Button 
-//           margines={'0 auto'}
-//           text={"Strona główna"} 
-//           fun={() => {setBoardState('board')}}
-//           color={"white"}/>
-//           </div>
-//           <Groups/>
-//         </div>
-//       );
-//     case 'account':
-//       return(
-//         <div className="App" style={{background: bgColor}}>
-//           <div className="buttons" style={{margin: "50px"}}>
-//           <Button 
-//           margines={'0 auto'}
-//           text={"Strona główna"} 
-//           fun={() => {setBoardState('board')}}
-//           color={"white"}/>
-//           </div>
-//           <Account changeBoardState={setBoardState}/>
-//         </div>
-//       );
-//     case 'passwordChange':
-//       return(
-//         <div className="App" style={{background: bgColor}}>
-//           <div className="buttons" style={{margin: "50px"}}>
-//           <Button 
-//           margines={'0 auto'}
-//           text={"Strona główna"} 
-//           fun={() => {setBoardState('board')}}
-//           color={"white"}/>
-//           <Button 
-//           marginesTop={'2vh'}
-//           margines={'0 auto'}
-//           text={"Konto"} 
-//           fun={() => {setBoardState('account')}}
-//           color={"white"}/>
-//           </div>
-//           <PasswordChange changeBoardState={setBoardState}/>
-//         </div>
-//       );
-//     case 'addTask': 
-//     return(
-//       <div className="App" style={{display: 'flex', background: bgColor}}>
-//       <div className="buttons" style={{margin: "50px"}}>
-//       <Button 
-//       margines={'0 auto'}
-//       text={"Strona główna"} 
-//       fun={() => {setBoardState('board')}}
-//       color={"white"}/>
-//       </div>
-//       <AddTask
-//         form={format}
-//         tytul={Boards[boardId].notatki[numTask].tytul}
-//         tresc={Boards[boardId].notatki[numTask].tresc}
-//         data={Boards[boardId].notatki[numTask].data}
-//         priorytet={Boards[boardId].notatki[numTask].priorytet}
-//         tagi={Boards[boardId].notatki[numTask].tagi}
-//         funkcja={setBoardState}/>
-//     </div>
-//     );
-//     case 'boardSet':
-//       return(
-//         <div className="App" style={{display: 'flex', background: bgColor}}>
-//           <div className="buttons" style={{margin: "50px"}}>
-//           <Button 
-//           margines={'0 auto'}
-//           text={"Strona główna"} 
-//           fun={() => {setBoardState('board')}}
-//           color={"white"}/>
-//           </div>
-//           <BoardSet
-//           boards={Boards}
-//           changeBoard={setBoardId}
-//           changeState={setBoardState}
-//           format={format}
-//           />
-//         </div>
-//       );
-//       case 'register':
-//        return(
-//          <div className="App" style={{display:'flex', background: bgColor}}>
-//          <div className="buttons" style={{margin: "50px"}}>
-//           <Button 
-//           margines={'0 auto'}
-//           text={"Wróć do logowania"} 
-//           fun={() => {setBoardState('login')}}
-//           color={"white"}/>
-//           </div>
-
-//          <RegistrationForm/>
-//          </div>
-//        )
-//       default:
-//         return(
-//           <div className="App" style={{display:'flex', background: bgColor}}>
-//           <LoginForm changeBoardState={setBoardState}/>
-//           </div>
-//         )
-
-//   }
 
  
 }

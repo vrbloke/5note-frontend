@@ -11,6 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./task.css"
 import { RiCloseFill } from "react-icons/ri";
 import TextEditor from "./TextEditor.js"
+import axios from 'axios';
 
 
 const users = [
@@ -32,7 +33,7 @@ const users = [
 
 
 
-const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, numTask }) => {
+const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId, usersList,onClose, numTask }) => {
 
   const content = ContentState.createFromText(tresc);
 
@@ -41,7 +42,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
   );
 
   useEffect(() => {
-    console.log(editorState);
+    console.log(tytul);
   }, [editorState]);
 
   const [showAllUsers, setShowAllUsers] = React.useState(false)
@@ -51,17 +52,30 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
   const [prior, setPriorytet] = React.useState(priorytet)
   const [tyt, setTytul] = React.useState(tytul)
   const [tr, setTresc] = React.useState(tresc)
-  const [listUsrs, setListUsrs] = React.useState(users);
-  const [usrId, setUsrId] = React.useState(-1);
+  const [listUsrs, setListUsrs] = React.useState(usersList);
+  const [usrId, setUsrId] = React.useState('');
   const [usrNick, setUsrNick] = React.useState('');
-  const [value, setValue] = React.useState('')
-  const [newText, setNewText] = React.useState(tresc)
+  const [value, setValue] = React.useState('');
+  const [newText, setNewText] = React.useState(tresc);
+  const [tag, setTag] = React.useState(tagi);
+  const [nick, setNick] = React.useState("");
+  const [uIds, setUIds] = React.useState(usersId);
 
 
-  function handleRemove(id) {
-    const newList = listUsrs.filter((item) => item.id !== id);
-
-    setListUsrs(newList);
+  function handleRemove(idx) {
+    console.log("del");
+    setListUsrs(listUsrs.filter((item) => item.id !== idx));
+   // changeId(idx);
+    axios.patch('http://localhost:8080/notes/'+id, {
+      userIds: uIds.filter((item) => item !== idx)
+      })
+      .then(function (response) {
+        console.log(response);
+        console.log(uIds);
+      })
+      .catch(function (error) {
+        console.log(error);
+    });
   }
 
   function uploadImageCallBack(file) {
@@ -89,6 +103,24 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
     setUsrNick(event.target.value);
   }
 
+  function addUsr()
+  {
+    axios.patch('http://localhost:8080/notes/'+id, {
+      userIds: [...usersId, usrId ]
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      axios.get('http://localhost:8080/users/search/findAllByNoteAccess?id='+id).then(res => {
+        setListUsrs(res.data);
+        console.log(res.data);
+       });
+  }
+
   function handleOnClick() {
     // // var text = editorState.getCurrentContent().getBlocksAsArray();
     // // console.log(text);
@@ -110,19 +142,39 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
     //     else newText += block + "\n";
     //   }
 
-    setTresc(newText);
-    console.log(tr);
-    console.log(startDate);
-    console.log(prior);
-    console.log(tyt);
+    axios.patch('http://localhost:8080/notes/'+id, {
+        title: tyt,
+        contents: newText,
+        date: startDate,
+        priority: prior,
+        tags: ((tag+" ").replace(/\s/g, '')).split(",")
+
+
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
+
   }
 
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      // this.setUsrId({value:e.target.value})
       console.log(usrNick);
-      setUsrId(1);
+      setUsrId('');
+      setNick('');
+      axios.get('http://localhost:8080/users/search/findByUsername?username='+usrNick).then(res => {
+      
+        setUsrId(res.data.id);
+        setNick(res.data.username);
+        //console.log(usrId);
+    });
+
     }
   }
 
@@ -139,7 +191,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
           marginesTop={'auto'}
           margines={'20px'}
           text={"Edytuj"} />
-        <FaUserPlus onClick={() => setShowAddUsers(!showAddUsers)} style={{ fontSize: '4vh', margin: '10px', marginTop: 'auto', marginBottom: 'auto', width: '10%' }} />
+        <FaUserPlus onClick={() => {setShowAddUsers(!showAddUsers); setUsrId('')}} style={{ fontSize: '4vh', margin: '10px', marginTop: 'auto', marginBottom: 'auto', width: '10%' }} />
         <FaUsers onClick={() => setShowAllUsers(!showAllUsers)} style={{ fontSize: '4vh', margin: '10px', marginTop: 'auto', marginBottom: 'auto', width: '10%' }} />
         <h1 style={{ margin: 'auto', marginRight: '10px' }}>{tyt}</h1>
         <h1 style={{ margin: 'auto', marginRight: '20px' }}>{startDate.toLocaleDateString()}</h1>
@@ -153,7 +205,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
             {listUsrs.map((item) => (
               <div key={item.id} style={{ border: '1px solid black', borderRadius: '12px', width: '300px', margin: '10px', display: 'flex' }}>
                 <CgProfile style={{ borderRadius: '12px', fontSize: '4vh', margin: 'auto', marginLeft: '10px' }} />
-                <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{item.nick}</p>
+                <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{item.username}</p>
                 <RiCloseFill style={{ color: 'black', margin: 'auto', marginRight: '10px', fontSize: '30px' }} onClick={() => handleRemove(item.id)} />
               </div>
             ))}
@@ -163,18 +215,15 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
 
         {showAddUsers && <div style={{ border: '1px solid black', padding: '5px', height: '200px', backgroundColor: 'white', margin: '25px', borderRadius: '12px' }}>
           <input style={{ borderRadius: '6px', width: '300px', fontSize: '20px' }} placeholder="Search" onKeyPress={handleKeyPress} onChange={handleChange} />
-          {usrId >= 0 &&
+          {usrId !='' &&
             <div style={{ border: '1px solid black', borderRadius: '12px', width: '300px', margin: '10px', display: 'flex' }}>
               <CgProfile style={{ fontSize: '4vh', margin: 'auto', marginLeft: '10px' }} />
-              <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{users[usrId].nick}</p>
-              <MdAdd style={{ fontSize: '4vh', margin: 'auto', marginRight: '10px', color: 'black' }} />
+              <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{nick}</p>
+              <MdAdd style={{ fontSize: '4vh', margin: 'auto', marginRight: '10px', color: 'black' }} onClick={()=>addUsr()} />
             </div>
           }
         </div>}
-
-        <div style={{ padding: '5vh', textAlign: 'justify', fontSize: '20px', overflowY: 'scroll', maxHeight: '600px', width: '100%' }}>
-          {tr}
-        </div>
+        <div style={{ padding: '5vh', overflowY: 'scroll', maxHeight: '600px', width: '100%' }} dangerouslySetInnerHTML={{__html: tr}} />
       </div>}
 
       {
@@ -206,7 +255,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi, funkcja, onClose, 
           <div style={{ backgroundColor: 'white', padding: '2px', width: '90%', margin: 'auto' }}>
             <TextEditor setValue={setValue} tresc={tr} fun={setNewText} />
           </div>
-          <input style={{ borderRadius: '6px', fontSize: '20px', width: '90%', marginTop: '10px' }} defaultValue={tagi} />
+          <input style={{ borderRadius: '6px', fontSize: '20px', width: '90%', marginTop: '10px' }} defaultValue={tagi} onChange={e => setTag(e.target.value)}/>
           <Button
             //fun={() => {setShowEditor(false)}}
             fun={() => {  handleOnClick(); funkcja(true); setShowEditor(false) }}
