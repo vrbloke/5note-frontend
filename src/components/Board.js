@@ -16,25 +16,25 @@ const Board = (props, { funkcja }) => {
   const [usersId, setUsersId] = React.useState([]);
   const [usersList, setUsersList] = React.useState([]);
 
-  function findTask(tyt)
+  function findTask(idx)
   {
-    axios.get('http://localhost:8080/notes/search/findAllByTitle?title='+tyt).then(res => {
+    axios.get('http://localhost:8080/notes/'+idx).then(res => {
      
-      setTytul(res.data["_embedded"]["notes"][0].title);
-      setTresc(res.data["_embedded"]["notes"][0].contents);
-      setData(res.data["_embedded"]["notes"][0].date);
-      setPriorytet(res.data["_embedded"]["notes"][0].priority);
-      setTagi(res.data["_embedded"]["notes"][0].tags);
-      seta(res.data["_embedded"]["notes"][0])
-      console.log(res.data["_embedded"]["notes"][0].date);
+      setTytul(res.data.title);
+      setTresc(res.data.contents);
+      setData(res.data.date);
+      setPriorytet(res.data.priority);
+      setTagi(res.data.tags);
+      seta(res.data)
+      setId(res.data.id);
+      setUsersId(res.data.userIds);
+      console.log(res.data.id);
       setShowTasks(false);
-      setId(res.data["_embedded"]["notes"][0].id);
-      setUsersId(res.data["_embedded"]["notes"][0].userIds);
     });
 
-    axios.get('http://localhost:8080/users').then(res => {
-     setUsersList(res.data["_embedded"]["users"]);
-     console.log(usersList);
+    axios.get('http://localhost:8080/users/search/findAllByNoteAccess?id='+idx).then(res => {
+     setUsersList(res.data);
+     console.log(res.data);
     });
   }
 
@@ -47,7 +47,7 @@ const Board = (props, { funkcja }) => {
               <Task
                key={item.id}
                 onIcon={() => {
-                  findTask(item.title);                
+                  findTask(item.id);                
                 }}
                 tytul={item.title}
                 tresc={item.contents}

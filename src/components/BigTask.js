@@ -42,7 +42,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId
   );
 
   useEffect(() => {
-    console.log(editorState);
+    console.log(tytul);
   }, [editorState]);
 
   const [showAllUsers, setShowAllUsers] = React.useState(false)
@@ -59,23 +59,22 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId
   const [newText, setNewText] = React.useState(tresc);
   const [tag, setTag] = React.useState(tagi);
   const [nick, setNick] = React.useState("");
+  const [uIds, setUIds] = React.useState(usersId);
 
 
   function handleRemove(idx) {
     console.log("del");
+    setListUsrs(listUsrs.filter((item) => item.id !== idx));
+   // changeId(idx);
     axios.patch('http://localhost:8080/notes/'+id, {
-      userIds: listUsrs.filter((item) => item.id !== idx)
+      userIds: uIds.filter((item) => item !== idx)
       })
       .then(function (response) {
         console.log(response);
+        console.log(uIds);
       })
       .catch(function (error) {
         console.log(error);
-    });
-
-    axios.get('http://localhost:8080/users').then(res => {
-      setListUsrs(res.data["_embedded"]["users"]);
-     console.log(usersList);
     });
   }
 
@@ -115,6 +114,11 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId
       .catch(function (error) {
         console.log(error);
       });
+
+      axios.get('http://localhost:8080/users/search/findAllByNoteAccess?id='+id).then(res => {
+        setListUsrs(res.data);
+        console.log(res.data);
+       });
   }
 
   function handleOnClick() {
@@ -155,6 +159,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId
       });
 
 
+
   }
 
 
@@ -167,7 +172,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja,usersId
       
         setUsrId(res.data.id);
         setNick(res.data.username);
-        console.log(usrId);
+        //console.log(usrId);
     });
 
     }
