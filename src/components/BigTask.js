@@ -53,11 +53,12 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClos
   const [tyt, setTytul] = React.useState(tytul)
   const [tr, setTresc] = React.useState(tresc)
   const [listUsrs, setListUsrs] = React.useState(users);
-  const [usrId, setUsrId] = React.useState(-1);
+  const [usrId, setUsrId] = React.useState('');
   const [usrNick, setUsrNick] = React.useState('');
   const [value, setValue] = React.useState('');
   const [newText, setNewText] = React.useState(tresc);
   const [tag, setTag] = React.useState(tagi);
+  const [nick, setNick] = React.useState("");
 
 
   function handleRemove(id) {
@@ -134,9 +135,16 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClos
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      // this.setUsrId({value:e.target.value})
       console.log(usrNick);
-      setUsrId(1);
+      setUsrId('');
+      setNick('');
+      axios.get('http://localhost:8080/users/search/findByUsername?username='+usrNick).then(res => {
+      
+        setUsrId(res.data.id);
+        setNick(res.data.username);
+        console.log(usrId);
+    });
+
     }
   }
 
@@ -153,7 +161,7 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClos
           marginesTop={'auto'}
           margines={'20px'}
           text={"Edytuj"} />
-        <FaUserPlus onClick={() => setShowAddUsers(!showAddUsers)} style={{ fontSize: '4vh', margin: '10px', marginTop: 'auto', marginBottom: 'auto', width: '10%' }} />
+        <FaUserPlus onClick={() => {setShowAddUsers(!showAddUsers); setUsrId('')}} style={{ fontSize: '4vh', margin: '10px', marginTop: 'auto', marginBottom: 'auto', width: '10%' }} />
         <FaUsers onClick={() => setShowAllUsers(!showAllUsers)} style={{ fontSize: '4vh', margin: '10px', marginTop: 'auto', marginBottom: 'auto', width: '10%' }} />
         <h1 style={{ margin: 'auto', marginRight: '10px' }}>{tyt}</h1>
         <h1 style={{ margin: 'auto', marginRight: '20px' }}>{startDate.toLocaleDateString()}</h1>
@@ -177,10 +185,10 @@ const BigTask = ({ form, tytul, tresc, data, priorytet, tagi,id, funkcja, onClos
 
         {showAddUsers && <div style={{ border: '1px solid black', padding: '5px', height: '200px', backgroundColor: 'white', margin: '25px', borderRadius: '12px' }}>
           <input style={{ borderRadius: '6px', width: '300px', fontSize: '20px' }} placeholder="Search" onKeyPress={handleKeyPress} onChange={handleChange} />
-          {usrId >= 0 &&
+          {usrId !='' &&
             <div style={{ border: '1px solid black', borderRadius: '12px', width: '300px', margin: '10px', display: 'flex' }}>
               <CgProfile style={{ fontSize: '4vh', margin: 'auto', marginLeft: '10px' }} />
-              <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{users[usrId].nick}</p>
+              <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{nick}</p>
               <MdAdd style={{ fontSize: '4vh', margin: 'auto', marginRight: '10px', color: 'black' }} />
             </div>
           }
