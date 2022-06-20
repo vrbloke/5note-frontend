@@ -334,7 +334,7 @@ const RenderStates = ({ val }) => {
     case 'register': 
       return registerState();
     default: 
-      return registerState();
+      return defaultState();
   }
 }
 
