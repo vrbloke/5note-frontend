@@ -37,7 +37,7 @@ function App() {
   const [boardState, setBoardState] = useState('pies');
   const [ac, setAc] = useState([]);
   const [flag, SetFlag] = React.useState(0);
-  const [userId, SetUserId] = React.useState("62af0c64c30c6b2a03e460b0");
+  const [userId, SetUserId] = React.useState("62b077824c80506230fa5f2e");
   const [aa, seta] = React.useState([]);
   const [user, SetUser] = React.useState([]);
   
@@ -265,7 +265,8 @@ const addTaskState = () => (
     priorytet={priorytet}
     tagi={tagi}
     id={id}
-    usersId={usersId}
+    userId={userId}
+    boardId={boardId}
     usersList={usersList}
     funkcja={setGet}/>
 </div>
