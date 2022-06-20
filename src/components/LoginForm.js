@@ -58,7 +58,13 @@ const handleSubmit = (e) => {
               setName('');
               setPassword('');
             }
-            else
+            if (error.response.status == 200) {
+             
+              props.changeBoardState("board")
+              setName('');
+              setPassword('');
+            }
+            else 
             {
               console.log(error.response)
             }

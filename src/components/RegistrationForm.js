@@ -42,21 +42,7 @@ const handleSubmit = (e) => {
           }
 
         );
-    axios.get('http://localhost:8080/users/search/findByUsername?username='+login).then(res => {
-        console.log(res.data);
-        setNewUserID(27);
-         
-
-        //console.log(res.data);
-    }).catch(function (error) {
-        setNewUserID(null);
-        console.log(error);
-       
-      });
-    // axios.get('http://localhost:8080/users').then(res => {
-    //     setUsersList2(res.data["_embedded"]["users"]);
-    //     console.log(res.data["_embedded"]["users"]);
-    // });   
+   
    
     if (login === '' || email === '' || password === '') 
     {
@@ -91,10 +77,14 @@ const handleSubmit = (e) => {
               setName('');
               setPassword('');
             }
-            else
+            else if (response.status == 200)
             { 
               
-              console.log(response);
+              alert("Zarejestrowano uzytkownika");
+              setNewUserID(null);
+              setEmail('');
+              setName('');
+              setPassword('');
             }
             
           })
