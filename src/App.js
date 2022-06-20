@@ -36,7 +36,8 @@ function App() {
 
   const [boardState, setBoardState] = useState('pies');
   const [ac, setAc] = useState([]);
-
+  const [flag, SetFlag] = React.useState(0);
+  const [userId, SetUserId] = React.useState("62af0c64c30c6b2a03e460b0");
   const [aa, seta] = React.useState([]);
   
   const [tytul, setTytul] = React.useState("tytul");
@@ -47,6 +48,9 @@ function App() {
   const [id, setId] = React.useState("");
   const [usersId, setUsersId] = React.useState([]);
   const [usersList, setUsersList] = React.useState([]);
+  const [boards, setBoards] =  React.useState([]);
+  const [boardsId, SetBoardsId] = React.useState('');
+
 
   function findTask(idx)
   {
@@ -72,12 +76,33 @@ function App() {
 
   async function setGet(stan)
   {
-    console.log("stan");
-      const r= await axios.get('http://localhost:8080/notes').then(res => {
+    var x=[];
+    const r = await axios.get('http://localhost:8080/boards/search/findAllByUserId?userId='+userId).then(res => {  
+      setBoards(res.data["_embedded"]["boards"]);
+      x=res.data["_embedded"]["boards"];
+    });
+
+    if(boardsId=='')
+    {
+      setBoardId(x[0].id);
+      const r2= await axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+x[0].id).then(res => {
       
-      seta(res.data["_embedded"]["notes"]);
+      seta(res.data);
       });
-    const r2 = await setBoardState(stan);
+    }else{
+      const r2= await axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+boardsId).then(res => {
+      
+      seta(res.data);
+      });
+    }
+
+    // console.log(x);
+    //   const r2= await axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+x[0].id).then(res => {
+      
+    //   seta(res.data);
+    //   });
+    console.log(boardsId);
+    setBoardState(stan);
     
   }
 
@@ -127,7 +152,7 @@ function App() {
       else{
         return (
           <div className="App" style={{background: bgColor}}>
-            <Nav changeBoardState={setGet}/>
+            <Nav changeBoardState={setGet} tytul={boards[0].name}/>
             <Board 
                   textColor={textColor}
                   textSize={textSize}
@@ -137,8 +162,9 @@ function App() {
                   //notatki={['1','b']}
                  // notatki={abc[0]}
                   notatki={aa}
-                  on
+                  boardId={boards[0].id}
                   funkcja={setShowNav}
+                 
               />
             <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setGet('settings')}}/>
           </div>

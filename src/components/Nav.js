@@ -5,7 +5,7 @@ import Button from './Button'
 const Nav = (props) => {
   return (
     <div className='buttons' >
-        <h1 style={{ color: 'lightGray' }}>Nazwa Tablicy</h1>
+        <h1 style={{ color: 'lightGray' }}>{props.tytul}</h1>
         <Button
           marginesTop={'2vh'}
           margines={'0 auto'}
