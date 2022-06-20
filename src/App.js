@@ -36,7 +36,8 @@ function App() {
 
   const [boardState, setBoardState] = useState('pies');
   const [ac, setAc] = useState([]);
-
+  const [flag, SetFlag] = React.useState(0);
+  const [userId, SetUserId] = React.useState("62af0c64c30c6b2a03e460b0");
   const [aa, seta] = React.useState([]);
   
   const [tytul, setTytul] = React.useState("tytul");
@@ -47,6 +48,9 @@ function App() {
   const [id, setId] = React.useState("");
   const [usersId, setUsersId] = React.useState([]);
   const [usersList, setUsersList] = React.useState([]);
+  const [boards, setBoards] =  React.useState([]);
+  const [board, SetBoard] = React.useState([]);
+
 
   function findTask(idx)
   {
@@ -72,12 +76,16 @@ function App() {
 
   async function setGet(stan)
   {
+    const r = await axios.get('http://localhost:8080/boards/search/findAllByUserId?userId='+userId).then(res => {  
+      setBoards(res.data["_embedded"]["boards"]);
+    });
+
     console.log("stan");
-      const r= await axios.get('http://localhost:8080/notes').then(res => {
+      const r2= await axios.get('http://localhost:8080/notes').then(res => {
       
       seta(res.data["_embedded"]["notes"]);
       });
-    const r2 = await setBoardState(stan);
+    const r3 = await setBoardState(stan);
     
   }
 
