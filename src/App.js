@@ -245,7 +245,7 @@ function App() {
   fun={() => {setBoardState('account')}}
   color={"white"}/>
   </div>
-  <PasswordChange changeBoardState={setGet}/>
+  <PasswordChange changeBoardState={setGet} user={user}/>
 </div>)
 
 const addTaskState = () => (
