@@ -43,7 +43,6 @@ const handleSubmit = (e) => {
 
         );
    
-   
     if (login === '' || email === '' || password === '') 
     {
         alert("Wypełnij wszystkie pola formularza");
@@ -85,6 +84,7 @@ const handleSubmit = (e) => {
               setEmail('');
               setName('');
               setPassword('');
+       
             }
             
           })

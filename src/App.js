@@ -309,7 +309,7 @@ const registerState = () => (
 
 const defaultState = () => (
   <div className="App" style={{display:'flex', background: bgColor}}>
-  <LoginForm changeBoardState={setGet}/>
+  <LoginForm changeBoardState={setGet} changeUserID={SetUserId}/>
   </div>
 )
 
