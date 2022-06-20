@@ -49,7 +49,7 @@ function App() {
   const [usersId, setUsersId] = React.useState([]);
   const [usersList, setUsersList] = React.useState([]);
   const [boards, setBoards] =  React.useState([]);
-  const [board, SetBoard] = React.useState([]);
+  const [boardsId, SetBoardsId] = React.useState('');
 
 
   function findTask(idx)
@@ -82,11 +82,26 @@ function App() {
       x=res.data["_embedded"]["boards"];
     });
 
-    console.log(x);
+    if(boardsId=='')
+    {
+      setBoardId(x[0].id);
       const r2= await axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+x[0].id).then(res => {
       
       seta(res.data);
       });
+    }else{
+      const r2= await axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+boardsId).then(res => {
+      
+      seta(res.data);
+      });
+    }
+
+    // console.log(x);
+    //   const r2= await axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+x[0].id).then(res => {
+      
+    //   seta(res.data);
+    //   });
+    console.log(boardsId);
     setBoardState(stan);
     
   }
