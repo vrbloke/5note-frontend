@@ -76,16 +76,18 @@ function App() {
 
   async function setGet(stan)
   {
+    var x=[];
     const r = await axios.get('http://localhost:8080/boards/search/findAllByUserId?userId='+userId).then(res => {  
       setBoards(res.data["_embedded"]["boards"]);
+      x=res.data["_embedded"]["boards"];
     });
 
-    console.log("stan");
-      const r2= await axios.get('http://localhost:8080/notes').then(res => {
+    console.log(x);
+      const r2= await axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+x[0].id).then(res => {
       
-      seta(res.data["_embedded"]["notes"]);
+      seta(res.data);
       });
-    const r3 = await setBoardState(stan);
+    setBoardState(stan);
     
   }
 
@@ -145,8 +147,9 @@ function App() {
                   //notatki={['1','b']}
                  // notatki={abc[0]}
                   notatki={aa}
-                  on
+                  boardId={boards[0].id}
                   funkcja={setShowNav}
+                 
               />
             <AiTwotoneSetting style={{fontSize:'5vh',margin:'5vh' , color:"white",marginTop:'25px'}} onClick={() => {setGet('settings')}}/>
           </div>

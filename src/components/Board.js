@@ -16,6 +16,7 @@ const Board = (props, { funkcja }) => {
   const [usersId, setUsersId] = React.useState([]);
   const [usersList, setUsersList] = React.useState([]);
   const [not, setNot] = React.useState(props.notatki);
+  const [boardId, setBoardId] = React.useState(props.boardId);
 
   function findTask(idx)
   {
@@ -41,10 +42,10 @@ const Board = (props, { funkcja }) => {
 
   function changeNot()
   {
-    axios.get('http://localhost:8080/notes').then(res => {
+    axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+boardId).then(res => {
       
-      setNot(res.data["_embedded"]["notes"]);
-      });
+      setNot(res.data);
+    });
   }
 
   return (
