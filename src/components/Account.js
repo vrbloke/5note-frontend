@@ -1,8 +1,34 @@
+import { findByTitle } from "@testing-library/react";
 import React from "react";
 import { Image } from "react-native";
 import Button from "./Button";
+import axios from 'axios';
 
 const Account = (props) => {
+
+  const [nick, SetNick] = React.useState(props.user.username);
+  const [tempNick, SetTempNick] = React.useState(props.user.username);
+
+
+
+  async function changeNick()
+  {
+    if(document.getElementById("nickInput").disabled==true)
+    {
+      const r1 = await axios.patch('http://localhost:8080/users/'+props.user.id, {
+        username: tempNick
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+    });
+    console.log(tempNick);
+    }
+    SetNick(tempNick);
+  }
+
   return (
     <div
       style={{
@@ -40,15 +66,17 @@ const Account = (props) => {
             }}
             id="nickInput"
             type="text"
-            defaultValue={"nick"}
+            defaultValue={nick}
             disabled={true}
+            onChange={ (event) => SetTempNick(event.target.value) }
           ></input>
           <Button
             margines={"0 auto"}
             text={"Zmień nick"}
             fun={() => {
               document.getElementById("nickInput").disabled =
-                document.getElementById("nickInput").disabled ? false : true;
+              document.getElementById("nickInput").disabled ? false : true;
+              changeNick();
             }}
             color={"white"}
           />

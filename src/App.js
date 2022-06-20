@@ -39,6 +39,7 @@ function App() {
   const [flag, SetFlag] = React.useState(0);
   const [userId, SetUserId] = React.useState("62af0c64c30c6b2a03e460b0");
   const [aa, seta] = React.useState([]);
+  const [user, SetUser] = React.useState([]);
   
   const [tytul, setTytul] = React.useState("tytul");
   const [tresc, setTresc] = React.useState("tresc");
@@ -77,30 +78,34 @@ function App() {
   async function setGet(stan)
   {
     var x=[];
+
     const r = await axios.get('http://localhost:8080/boards/search/findAllByUserId?userId='+userId).then(res => {  
       setBoards(res.data["_embedded"]["boards"]);
-      x=res.data["_embedded"]["boards"];
+      x = res.data["_embedded"]["boards"];
+      console.log(boards);
     });
 
     if(boardsId=='')
     {
       setBoardId(x[0].id);
       const r2= await axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+x[0].id).then(res => {
-      
-      seta(res.data);
+        seta(res.data);
+        console.log("if");
       });
     }else{
-      const r2= await axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+boardsId).then(res => {
-      
+      const r2= await axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+boardsId).then(res => { 
       seta(res.data);
+      console.log("else");
       });
     }
 
-    // console.log(x);
-    //   const r2= await axios.get('http://localhost:8080/notes/search/findAllByBoardId?id='+x[0].id).then(res => {
-      
-    //   seta(res.data);
-    //   });
+    const r3= await axios.get('http://localhost:8080/users/'+userId).then(res => { 
+      SetUser(res.data);
+      console.log("else");
+    });
+
+
+
     console.log(boardsId);
     setBoardState(stan);
     
@@ -222,7 +227,7 @@ function App() {
       fun={() => {setGet('board')}}
       color={"white"}/>
       </div>
-      <Account changeBoardState={setGet}/>
+      <Account changeBoardState={setGet} user={user}/>
     </div>
   )
 
@@ -240,7 +245,7 @@ function App() {
   fun={() => {setBoardState('account')}}
   color={"white"}/>
   </div>
-  <PasswordChange changeBoardState={setGet}/>
+  <PasswordChange changeBoardState={setGet} user={user}/>
 </div>)
 
 const addTaskState = () => (
