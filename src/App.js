@@ -135,7 +135,7 @@ function App() {
       else{
         return (
           <div className="App" style={{background: bgColor}}>
-            <Nav changeBoardState={setGet}/>
+            <Nav changeBoardState={setGet} tytul={boards[0].name}/>
             <Board 
                   textColor={textColor}
                   textSize={textSize}
